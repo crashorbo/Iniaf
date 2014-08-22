@@ -1,0 +1,7 @@
+parameters:
+#    semilla.example.class: Iniaf\Bundle\SemillaBundle\Example
+
+services:
+#    semilla.example:
+#        class: %semilla.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

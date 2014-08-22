@@ -1,0 +1,9 @@
+{% for comunidad in comunidades %}
+    <tr>
+        <td>{{ comunidad.municipio.provincia.departamento }}</td>
+        <td>{{ comunidad.municipio.provincia }}</td>
+        <td>{{ comunidad.municipio }}</td>
+        <td>{{ comunidad }}</td>
+        <td><a href="">Editar</a></td>
+    </tr>
+{% endfor %}

@@ -1,0 +1,52 @@
+<pdf>
+    <dynamic-page>
+        <h1>Instituto Nacional de Innovación Agropecuaria y Forestal</h1>
+        <div color="white" border.color="black" background.color="black" padding-left="10">Deudas del Cooperador</div>
+        <table>
+            <tr>
+                <td width="120" height="12" padding-left="10"><b>Nombre: </b></td>
+                <td padding-left="10">{{ cooperador.nombre }}</td>
+            </tr>
+            <tr>
+                <td width="120" height="12" padding-left="10"><b>CI/NIT: </b></td>
+                <td padding-left="10">{{ cooperador.ciNit }}</td>
+            </tr>
+        </table>
+        <br /><br/>
+        <h1>Lista de Deudas</h1>
+        <table>
+            <tr color="white" border.color="black" background.color="black" padding-left="10">
+                <td height="12" padding-left="10"><b>Cultivo</b></td>
+                <td padding-left="10">Nro de Campo</td>
+                <td height="12" padding-left="10">Superficie</td>
+                <td height="12" padding-left="10">Campaña</td>
+                <td height="12" padding-left="10">Saldo</td>
+                <td height="12" padding-left="10">Total</td>
+            </tr>
+            {% set totalsaldo = 0 %}
+            {% set total = 0 %}
+            {% for registro in registros %}
+                {% if registro.saldo != 0 %}
+                    <tr>
+                        <td>{{ registro.variedad.cultivo }}</td>
+                        <td>{{ registro.nroCampo }}</td>
+                        <td>{{ registro.superficie }}</td>
+                        <td>{{ registro.inscripcion.campana }}</td>
+                        <td>{{ registro.saldo }}</td>
+                        <td>{{ registro.total }}</td>
+                    </tr>
+                    {% set total = total + registro.total %}
+                    {% set totalsaldo = totalsaldo + registro.saldo %}
+                {% endif %}
+            {% endfor %}
+            <tr color="white" border.color="black" background.color="black" padding-left="10">
+                <td><b>TOTALES</b></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{ totalsaldo }}</td>
+                <td>{{ total }}</td>
+            </tr>
+        </table>
+    </dynamic-page>
+</pdf>

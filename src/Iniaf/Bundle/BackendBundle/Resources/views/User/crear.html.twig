@@ -1,0 +1,83 @@
+{% extends 'BackendBundle::layout.html.twig' %}
+
+{% block subtitulo %}Usuario{% endblock %}
+
+{% block seccion %}Usuario{% endblock %}
+
+{% block navprin %}
+    <li><a href="{{ path('backend_home') }}"> Inicio</a></li>
+    <li class="active"><a href="{{ path('backend_user_home') }}">Usuario</a></li>
+    <li><a href="{{ path('backend_cultivo_home') }}">Semilla</a></li>
+    <li><a href="{{ path('backend_localizacion_home') }}">Localizacion</a></li>
+    <li><a href="{{ path('backend_semillera_home') }}">Semillera</a></li>
+{% endblock %}
+
+{% block conprin %}
+    <div class="row">
+        <div class="col-md-offset-2 col-md-6">
+            <form class="form-horizontal" action="{{ path('backend_user_crear') }}" method="POST">
+                {{ form_errors(form) }}
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Nombres</label>
+                    <div class="col-sm-8">
+                        {{ form_errors(form.nombres) }}
+                        {{ form_widget(form.nombres) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Apellidos</label>
+                    <div class="col-sm-8">
+                        {{ form_errors(form.apellidos) }}
+                        {{ form_widget(form.apellidos) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">CI</label>
+                    <div class="col-sm-4">
+                        {{ form_errors(form.ci) }}
+                        {{ form_widget(form.ci) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Direccion</label>
+                    <div class="col-sm-8">
+                        {{ form_errors(form.direccion) }}
+                        {{ form_widget(form.direccion) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Telefono</label>
+                    <div class="col-sm-4">
+                        {{ form_errors(form.telefono) }}
+                        {{ form_widget(form.telefono) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Celular</label>
+                    <div class="col-sm-4">
+                        {{ form_errors(form.celular) }}
+                        {{ form_widget(form.celular) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Email</label>
+                    <div class="col-sm-8">
+                        {{ form_errors(form.email) }}
+                        {{ form_widget(form.email) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Tipo Usuario</label>
+                    <div class="col-sm-4">
+                        {{ form_errors(form.rol) }}
+                        {{ form_widget(form.rol) }}
+                    </div>
+                </div>
+                <div class="col-sm-offset-4 col-sm-8">
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                </div>
+                {{ form_rest(form) }}
+            </form>
+        </div>
+    </div>
+{% endblock %}

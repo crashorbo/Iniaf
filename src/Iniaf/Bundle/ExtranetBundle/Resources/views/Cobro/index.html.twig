@@ -1,0 +1,31 @@
+{% extends 'ExtranetBundle::layout.html.twig' %}
+
+{% block subtitulo %}Cobro{% endblock %}
+
+{% block seccion %}Cobro{% endblock %}
+
+{% block navprin %}
+    <li><a href="{{ path('extranet_home') }}"> Inicio</a></li>
+    {% if usuario.rol == 'ADMINISTRADOR' %}
+        <li><a href="{{ path('extranet_tarifa_home') }}">Tarifa</a></li>
+        <li><a href="{{ path('extranet_cobro_home') }}">Cobro</a></li>
+    {% endif %}
+    {% if usuario.rol == 'TECNICO' %}
+        <li class="active"><a href="{{ path('extranet_semillera_home') }}">Semillera</a></li>
+        <li><a href="{{ path('extranet_certificacion_home') }}">Certificacion</a></li>
+    {% endif %}
+{% endblock %}
+
+{% block conprin %}
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <form class="form-inline" role="form" method="POST" action="{{ path('extranet_cobro_busqueda') }}">
+                <div class="form-group">
+                    <label class="sr-only" for="exampleInputPassword2">Password</label>
+                    <input name="_nrodoc" type="text" class="form-control" id="exampleInputPassword2">
+                </div>
+                <button type="submit" class="btn btn-default">Buscar</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

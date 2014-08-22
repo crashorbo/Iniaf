@@ -1,0 +1,125 @@
+{% extends 'ExtranetBundle::layout.html.twig' %}
+
+{% block subtitulo %}Perfil{% endblock %}
+
+{% block seccion %}Perfil{% endblock %}
+
+{% block navprin %}
+    <li><a href="{{ path('extranet_home') }}"> Inicio</a></li>
+    {% if usuario.rol == 'ADMINISTRADOR' %}
+        <li><a href="">Tarifa</a></li>
+        <li><a href="">Cobro</a></li>
+    {% endif %}
+    {% if usuario.rol == 'TECNICO' %}
+        <li><a href="{{ path('extranet_semillera_home') }}">Semillera</a></li>
+        <li class="active"><a href="{{ path('extranet_certificacion_home') }}">Certificacion</a></li>
+    {% endif %}
+{% endblock %}
+{% block opciones %}
+
+{% endblock %}
+{% block conprin %}
+    <div class="row">
+        <div class="col-md-offset-2 col-md-6">
+            <form class="form-horizontal" action="{{ path('extranet_perfil_home') }}" method="POST">
+                {{ form_errors(form) }}
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Nombres</label>
+                    <div class="col-sm-8">
+                        {{ form_errors(form.nombres) }}
+                        {{ form_widget(form.nombres) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Apellidos</label>
+                    <div class="col-sm-8">
+                        {{ form_errors(form.apellidos) }}
+                        {{ form_widget(form.apellidos) }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Direccion</label>
+                    <div class="col-sm-8">
+                        {{ form_errors(form.direccion) }}
+                        {{ form_widget(form.direccion) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Telefono</label>
+                    <div class="col-sm-4">
+                        {{ form_errors(form.telefono) }}
+                        {{ form_widget(form.telefono) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Celular</label>
+                    <div class="col-sm-4">
+                        {{ form_errors(form.celular) }}
+                        {{ form_widget(form.celular) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Email</label>
+                    <div class="col-sm-8">
+                        {{ form_errors(form.email) }}
+                        {{ form_widget(form.email) }}
+                    </div>
+                </div>
+                <div class="col-sm-offset-4 col-sm-8">
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Cambiar Contraseña</button>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        {{ form_errors(form.ci) }}
+                        {{ form_widget(form.ci, { 'attr': {'class': 'form-control', 'style':'visibility:hidden'} }) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        {{ form_errors(form.rol) }}
+                        {{ form_widget(form.rol, { 'attr': {'class': 'form-control',  'style':'visibility:hidden'} }) }}
+                    </div>
+                </div>
+                {{ form_rest(form) }}
+            </form>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Cambiar Contraseña</h4>
+                </div>
+                <div class="modal-body">
+                    <form  class="form-horizontal" method="post" action="{{ path('extranet_perfil_pass') }}">
+                        {{ form_errors(form1) }}
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Contraseña</label>
+                            <div class="col-sm-8">
+                                {{ form_errors(form1.password.first) }}
+                                {{ form_widget(form1.password.first) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Repetir Contraseña</label>
+                            <div class="col-sm-8">
+                                {{ form_errors(form1.password.second) }}
+                                {{ form_widget(form1.password.second) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-8 col-sm-offset-4">
+                                <button type="submit" class="btn btn-primary">Aceptar</button>
+                            </div>
+                        </div>
+                        {{ form_rest(form1) }}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

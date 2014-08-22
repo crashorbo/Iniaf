@@ -1,0 +1,60 @@
+extranet_home:
+    pattern:  /
+    defaults: { _controller: ExtranetBundle:Default:index }
+
+extranet_semillera:
+   resource: "@ExtranetBundle/Resources/config/routing/semillera.yml"
+   prefix:   /semillera
+
+extranet_certificacion:
+   resource: "@ExtranetBundle/Resources/config/routing/certificacion.yml"
+   prefix:   /certificacion
+
+extranet_inscripcion:
+   resource: "@ExtranetBundle/Resources/config/routing/inscripcion.yml"
+   prefix:   /inscripcion
+
+extranet_inspeccioncampo:
+   resource: "@ExtranetBundle/Resources/config/routing/inspeccioncampo.yml"
+   prefix:  /inspeccioncampo
+
+extranet_hojacosecha:
+   resource: "@ExtranetBundle/Resources/config/routing/hojacosecha.yml"
+   prefix:  /hojacosecha
+
+extranet_inspeccionalmacen:
+   resource: "@ExtranetBundle/Resources/config/routing/inspeccionalmacen.yml"
+   prefix:  /inspeccionalmacen
+
+extranet_cooperador:
+   resource: "@ExtranetBundle/Resources/config/routing/cooperador.yml"
+   prefix:   /cooperador
+
+extranet_registro:
+   resource: "@ExtranetBundle/Resources/config/routing/registro.yml"
+   prefix:   /registro
+
+extranet_cobro:
+   resource: "@ExtranetBundle/Resources/config/routing/cobro.yml"
+   prefix:   /cobro
+
+extranet_perfil:
+   resource: "@ExtranetBundle/Resources/config/routing/perfil.yml"
+   prefix:  /perfil
+
+extranet_tarifa:
+   resource: "@ExtranetBundle/Resources/config/routing/tarifa.yml"
+   prefix:   /tarifa
+
+extranet_login:
+   pattern:   /login
+   defaults:  { _controller: ExtranetBundle:Default:login }
+
+extranet_login_check:
+   pattern:   /login_check
+
+extranet_logout:
+   pattern:   /logout
+index:
+    pattern: /
+    defaults: { _controller: ExtranetBundle:Tarifa:index }

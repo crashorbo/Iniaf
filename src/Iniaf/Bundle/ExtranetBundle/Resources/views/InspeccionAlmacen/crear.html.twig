@@ -1,0 +1,385 @@
+{% extends 'ExtranetBundle::layout.html.twig' %}
+
+{% block subtitulo %}Certificacion{% endblock %}
+
+{% block seccion %}Inscripcion{% endblock %}
+
+{% block navprin %}
+    <li><a href="{{ path('extranet_home') }}"> Inicio</a></li>
+    {% if usuario.rol == 'ADMINISTRADOR' %}
+        <li><a href="">Tarifa</a></li>
+        <li><a href="">Cobro</a></li>
+    {% endif %}
+    {% if usuario.rol == 'TECNICO' %}
+        <li><a href="{{ path('extranet_semillera_home') }}">Semillera</a></li>
+        <li class="active"><a href="{{ path('extranet_certificacion_home') }}">Certificacion</a></li>
+    {% endif %}
+{% endblock %}
+
+{% block conprin %}
+    <div class="col-md-10 col-md-offset-1">
+        <div class="row">
+            <div class="col-md-6">
+                <p><b>Semillera: </b>{{ registro.inscripcion.semillera.nombre }}</p>
+                <p><b>Campaña: </b>{{ registro.inscripcion.campana }}</p>
+                <p><b>Cooperador: </b>{{ registro.cooperador.nombre }}</p>
+            </div>
+            <div class="col-md-6">
+                <p><b>Comunidad: </b>{{ registro.inscripcion.semillera.comunidad }}</p>
+                <p><b>Nro Campo: </b>{{ registro.nroCampo }}</p>
+                <p><b>Cultivo:</b> {{ registro.variedad.cultivo }}</p>
+            </div>
+        </div>
+        <hr/>
+        <div class="row">
+            <form role="form" action="{{ path('extranet_inspeccionalmacen_crear', {'id': registro.id }) }}" method="POST">
+            {{ form_errors(form) }}
+            <div class="row">
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <label for="">Fecha de Inspeccion:</label>
+                        {{ form_errors(form.fechaInspeccion) }}
+                        {{ form_widget(form.fechaInspeccion) }}
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <label for="">Numero de Lote:</label>
+                        {{ form_errors(form.numeroLote) }}
+                        {{ form_widget(form.numeroLote) }}
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <label for="">Categoria en Almacen:</label>
+                        <select class="form-control" name="registro_categoria" id="inspeccion_categoria">
+                            <option value="">CATEGORIA</option>
+                            {% for categoria in categorias %}
+                                <option value="{{ categoria.id }}">{{ categoria }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <label for="">Generacion en Almacen:</label>
+                        <select class="form-control" name="registro_generacion" id="inspeccion_generacion">
+                            <option value="">GENERACION</option>
+                        </select>
+                        {{ form_errors(form.generacion) }}
+                        {{ form_widget(form.generacion) }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 col-xs-offset-1">
+                    <div class="form-group">
+                        <label for="">Tamaño Tuberculo I:</label>
+                        {{ form_errors(form.t1) }}
+                        {{ form_widget(form.t1) }}
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <div class="form-group">
+                        <label for="">Tamaño Tuberculo II:</label>
+                        {{ form_errors(form.t2) }}
+                        {{ form_widget(form.t2) }}
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <div class="form-group">
+                        <label for="">Tamaño Tuberculo III:</label>
+                        {{ form_errors(form.t3) }}
+                        {{ form_widget(form.t3) }}
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <div class="form-group">
+                        <label for="">Tamaño Tuberculo IV:</label>
+                        {{ form_errors(form.t4) }}
+                        {{ form_widget(form.t4) }}
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <div class="form-group">
+                        <label for="">Tamaño Tuberculo V:</label>
+                        {{ form_errors(form.t5) }}
+                        {{ form_widget(form.t5) }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <label for="">Peso por Bolsa(Kg):</label>
+                        {{ form_errors(form.pesoBolsa) }}
+                        {{ form_widget(form.pesoBolsa) }}
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <label for="">Total de Bolsas por Lote:</label>
+                        {{ form_errors(form.totalBolsas) }}
+                        {{ form_widget(form.totalBolsas) }}
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <label for="">Puntaje Maximo:</label>
+                        {{ form_errors(form.puntajeMaximo) }}
+                        {{ form_widget(form.puntajeMaximo) }}
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <label for="">Aprobado:</label>
+                        {{ form_errors(form.aprobado) }}
+                        {{ form_widget(form.aprobado) }}
+                    </div>
+                </div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-xs-6 col-xs-offset-1">
+                    <div class="form-group">
+                        <label for=""><b>Factor - Indice Importancia</b></label>
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <div class="form-group">
+                        <label for=""><b>N° Total</b></label>
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <div class="form-group">
+                        <label for=""><b>Total</b></label>
+                    </div>
+                </div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-xs-6 col-xs-offset-1">
+                    <div class="form-group">
+                        <label for="">Pudricion Blanda/x10:</label>
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <div class="form-group">
+                        {{ form_errors(form.n1) }}
+                        {{ form_widget(form.n1) }}
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <div class="form-group">
+                        <label for="" id="n1">0</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-xs-offset-1">
+                    <div class="form-group">
+                        <label for="">Pudricion Seca/x8:</label>
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <div class="form-group">
+                        {{ form_errors(form.n2) }}
+                        {{ form_widget(form.n2) }}
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <div class="form-group">
+                        <label for="" id="n2">0</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-xs-offset-1">
+                    <div class="form-group">
+                        <label for="">Roña(Spngospera subterranea)/x4</label>
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <div class="form-group">
+                        {{ form_errors(form.n3) }}
+                        {{ form_widget(form.n3) }}
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <div class="form-group">
+                        <label for="" id="n3">0</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-xs-offset-1">
+                    <div class="form-group">
+                        <label for="">Rhizoctoniasis/x4:</label>
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <div class="form-group">
+                        {{ form_errors(form.n4) }}
+                        {{ form_widget(form.n4) }}
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <div class="form-group">
+                        <label for="" id="n4">0</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-xs-offset-1">
+                    <div class="form-group">
+                        <label for="">Tuberculos Afectados por Insectos/x2:</label>
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <div class="form-group">
+                        {{ form_errors(form.n5) }}
+                        {{ form_widget(form.n5) }}
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <div class="form-group">
+                        <label for="" id="n5">0</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-xs-offset-1">
+                    <div class="form-group">
+                        <label for="">Mezcla Varietal/x1:</label>
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <div class="form-group">
+                        {{ form_errors(form.n6) }}
+                        {{ form_widget(form.n6) }}
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <div class="form-group">
+                        <label for="" id="n6">0</label>
+                    </div>
+                </div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="">Observaciones:</label>
+                        {{ form_errors(form.observaciones) }}
+                        {{ form_widget(form.observaciones) }}
+                    </div>
+                </div>
+            </div>
+            {{ form_rest(form) }}
+            <div class="row">
+                <div class="col-xs-3 col-xs-offset-9">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script>
+        $("#extranet_inspeccionalmacen_fechaInspeccion").datepicker();
+        function CalcularTotal()
+        {
+            var s1 = $("#n1").text();
+            var s2 = $("#n2").text();
+            var s3 = $("#n3").text();
+            var s4 = $("#n4").text();
+            var s5 = $("#n5").text();
+            var s6 = $("#n6").text();
+            return parseInt(s1)+parseInt(s2)+parseInt(s3)+parseInt(s4)+parseInt(s5)+parseInt(s6);
+        }
+
+        function CalcularTotalBolsas()
+        {
+            var t1 = $("#extranet_inspeccionalmacen_t1").val()
+            var t2 = $("#extranet_inspeccionalmacen_t2").val()
+            var t3 = $("#extranet_inspeccionalmacen_t3").val()
+            var t4 = $("#extranet_inspeccionalmacen_t4").val()
+            var t5 = $("#extranet_inspeccionalmacen_t5").val()
+            return parseInt(t1)+parseInt(t2)+parseInt(t3)+parseInt(t4)+parseInt(t5);
+        }
+        {{ parent() }}
+        $(function(){
+            $("#inspeccion_categoria").change(function(){
+                var data = {
+                    categoria_id: $(this).val()
+                };
+                $.ajax({
+                    type: 'post',
+                    url: '{{ path("extranet_select_generacion") }}',
+                    data: data,
+                    success: function(data) {
+                        $('#inspeccion_generacion').html(data);
+                    }
+                });
+            });
+            $("#inspeccion_generacion").change(function(){
+                var valor = $(this).val();
+                $("#extranet_inspeccionalmacen_generacion").val(valor);
+            });
+
+            $("#extranet_inspeccionalmacen_n1").keyup(function(){
+                var valor = $(this).val();
+                $("#n1").text(valor*10);
+                $("#extranet_inspeccionalmacen_puntajeMaximo").val(CalcularTotal());
+            });
+            $("#extranet_inspeccionalmacen_n2").keyup(function(){
+                var valor = $(this).val();
+                $("#n2").text(valor*8);
+                $("#extranet_inspeccionalmacen_puntajeMaximo").val(CalcularTotal());
+            });
+            $("#extranet_inspeccionalmacen_n3").keyup(function(){
+                var valor = $(this).val();
+                $("#n3").text(valor*4);
+                $("#extranet_inspeccionalmacen_puntajeMaximo").val(CalcularTotal());
+            });
+            $("#extranet_inspeccionalmacen_n4").keyup(function(){
+                var valor = $(this).val();
+                $("#n4").text(valor*4);
+                $("#extranet_inspeccionalmacen_puntajeMaximo").val(CalcularTotal());
+            });
+            $("#extranet_inspeccionalmacen_n5").keyup(function(){
+                var valor = $(this).val();
+                $("#n5").text(valor*2);
+                $("#extranet_inspeccionalmacen_puntajeMaximo").val(CalcularTotal());
+            });
+            $("#extranet_inspeccionalmacen_n6").keyup(function(){
+                var valor = $(this).val();
+                $("#n6").text(valor);
+                $("#extranet_inspeccionalmacen_puntajeMaximo").val(CalcularTotal());
+            });
+            $("#extranet_inspeccionalmacen_t1").keyup(function(){
+                var valor = $(this).val();
+                $("#extranet_inspeccionalmacen_totalBolsas").val(CalcularTotalBolsas());
+            });
+            $("#extranet_inspeccionalmacen_t2").keyup(function(){
+                var valor = $(this).val();
+                $("#extranet_inspeccionalmacen_totalBolsas").val(CalcularTotalBolsas());
+            });
+            $("#extranet_inspeccionalmacen_t3").keyup(function(){
+                var valor = $(this).val();
+                $("#extranet_inspeccionalmacen_totalBolsas").val(CalcularTotalBolsas());
+            });
+            $("#extranet_inspeccionalmacen_t4").keyup(function(){
+                var valor = $(this).val();
+                $("#extranet_inspeccionalmacen_totalBolsas").val(CalcularTotalBolsas());
+            });
+            $("#extranet_inspeccionalmacen_t5").keyup(function(){
+                var valor = $(this).val();
+                $("#extranet_inspeccionalmacen_totalBolsas").val(CalcularTotalBolsas());
+            });
+        });
+    </script>
+{% endblock %}

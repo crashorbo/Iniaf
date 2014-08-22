@@ -1,0 +1,297 @@
+{% extends 'ExtranetBundle::layout.html.twig' %}
+
+{% block subtitulo %}Certificacion{% endblock %}
+
+{% block seccion %}Inscripcion{% endblock %}
+
+{% block navprin %}
+    <li><a href="{{ path('extranet_home') }}"> Inicio</a></li>
+    {% if usuario.rol == 'ADMINISTRADOR' %}
+        <li><a href="">Tarifa</a></li>
+        <li><a href="">Cobro</a></li>
+    {% endif %}
+    {% if usuario.rol == 'TECNICO' %}
+        <li><a href="{{ path('extranet_semillera_home') }}">Semillera</a></li>
+        <li class="active"><a href="{{ path('extranet_certificacion_home') }}">Certificacion</a></li>
+    {% endif %}
+{% endblock %}
+
+{% block conprin %}
+    <div class="col-md-10 col-md-offset-1">
+        <div class="row">
+            <div class="col-md-6">
+                <p><b>Semillera: </b>{{ registro.inscripcion.semillera.nombre }}</p>
+                <p><b>Campaña: </b>{{ registro.inscripcion.campana }}</p>
+                <p><b>Cooperador: </b>{{ registro.cooperador.nombre }}</p>
+            </div>
+            <div class="col-md-6">
+                <p><b>Comunidad: </b>{{ registro.inscripcion.semillera.comunidad }}</p>
+                <p><b>Nro Campo: </b>{{ registro.nroCampo }}</p>
+                <p><b>Cultivo:</b> {{ registro.variedad.cultivo }}</p>
+            </div>
+        </div>
+        <hr/>
+        <div class="row">
+            <form role="form" action="{{ path('extranet_inspeccioncampo_crear', {'id': registro.id}) }}" method="POST">
+                {{ form_errors(form) }}
+                <div class="row">
+                    <div class="col-xs-3">
+                        <div class="form-group">
+                            <label for="">Fecha de Inspeccion:</label>
+                            {{ form_errors(form.fechaInspeccion) }}
+                            {{ form_widget(form.fechaInspeccion) }}
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="form-group">
+                            <label for="">Numero de Inspeccion:</label>
+                            {{ form_errors(form.numeroInspeccion) }}
+                            {{ form_widget(form.numeroInspeccion) }}
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="form-group">
+                            <label for="">Nombre del Lugar:</label>
+                            {{ form_errors(form.nombreLugar) }}
+                            {{ form_widget(form.nombreLugar) }}
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="form-group">
+                            <label for="">Superficie:</label>
+                            {{ form_errors(form.superficie) }}
+                            {{ form_widget(form.superficie) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3">
+                        <div class="form-group">
+                            <label for="">Fecha de Siembra:</label>
+                            {{ form_errors(form.fechaSiembra) }}
+                            {{ form_widget(form.fechaSiembra) }}
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="form-group">
+                            <label for="">Fecha de Floracion:</label>
+                            {{ form_errors(form.fechaFloracion) }}
+                            {{ form_widget(form.fechaFloracion) }}
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="form-group">
+                            <label for="">Fecha de Cosecha:</label>
+                            {{ form_errors(form.fechaCosecha) }}
+                            {{ form_widget(form.fechaCosecha) }}
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="form-group">
+                            <label for="">Aislamiento:</label>
+                            {{ form_errors(form.aislamiento) }}
+                            {{ form_widget(form.aislamiento) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3">
+                        <div class="form-group">
+                            <label for="">Poblacion por Hectarea:</label>
+                            {{ form_errors(form.poblacionHectarea) }}
+                            {{ form_widget(form.poblacionHectarea) }}
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="form-group">
+                            <label for="">Control de Malezas:</label>
+                            {{ form_errors(form.controlMaleza) }}
+                            {{ form_widget(form.controlMaleza) }}
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="form-group">
+                            <label for="">Control de Insectos:</label>
+                            {{ form_errors(form.controlInsectos) }}
+                            {{ form_widget(form.controlInsectos) }}
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="form-group">
+                            <label for="">Control de Enfermedades:</label>
+                            {{ form_errors(form.controlEnfermedades) }}
+                            {{ form_widget(form.controlEnfermedades) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3">
+                        <div class="form-group">
+                            <label for="">Estado General:</label>
+                            {{ form_errors(form.estadoGeneral) }}
+                            {{ form_widget(form.estadoGeneral) }}
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="form-group">
+                            <label for="">Mezcla Varietal:</label>
+                            {{ form_errors(form.mezclaVarietal) }}
+                            {{ form_widget(form.mezclaVarietal) }}
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="form-group">
+                            <label for="">MVPI:</label>
+                            {{ form_errors(form.mvpi) }}
+                            {{ form_widget(form.mvpi) }}
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="form-group">
+                            <label for="">PAPI:</label>
+                            {{ form_errors(form.papi) }}
+                            {{ form_widget(form.papi) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3">
+                        <div class="form-group">
+                            <label for="">Categoria Utilizada:</label>
+                            <select class="form-control" name="registro_categoria" id="inspeccion_categoria">
+                                <option value="">CATEGORIA</option>
+                                {% for categoria in categorias %}
+                                    <option value="{{ categoria.id }}">{{ categoria }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="form-group">
+                            <label for="">Generacion Utilizada:</label>
+                            <select class="form-control" name="registro_generacion" id="inspeccion_generacion">
+                                <option value="">GENERACION</option>
+                            </select>
+                            {{ form_errors(form.generacionUtilizada) }}
+                            {{ form_widget(form.generacionUtilizada) }}
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="form-group">
+                            <label for="">Cumple con las Normas:</label>
+                            {{ form_errors(form.cumpleNorma) }}
+                            {{ form_widget(form.cumpleNorma) }}
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="form-group">
+                            <label for="">Cultivo Anterior:</label>
+                            {{ form_errors(form.cultivoAnterior) }}
+                            {{ form_widget(form.cultivoAnterior) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3">
+                        <div class="form-group">
+                            <label for="">Categoria Pretendida:</label>
+                            <select class="form-control" name="registro_categoria" id="inspeccion_categoriapret">
+                                <option value="">CATEGORIA</option>
+                                {% for categoria in categorias %}
+                                    <option value="{{ categoria.id }}">{{ categoria }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="form-group">
+                            <label for="">Generacion Pretendida:</label>
+                            <select class="form-control" name="registro_generacion" id="inspeccion_generacionpret">
+                                <option value="">GENERACION</option>
+                            </select>
+                            {{ form_errors(form.generacionPretendida) }}
+                            {{ form_widget(form.generacionPretendida) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="">Persona que recibio las Indicaciones:</label>
+                            {{ form_errors(form.personaIndicaciones) }}
+                            {{ form_widget(form.personaIndicaciones) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="">Observaciones:</label>
+                            {{ form_errors(form.observaciones) }}
+                            {{ form_widget(form.observaciones) }}
+                        </div>
+                    </div>
+                </div>
+                {{ form_rest(form) }}
+                <div class="row">
+                    <div class="col-xs-3 col-xs-offset-9">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script>
+        $("#extranet_hojainspeccion_fechaInspeccion").datepicker();
+        $("#extranet_hojainspeccion_fechaSiembra").datepicker();
+        $("#extranet_hojainspeccion_fechaFloracion").datepicker();
+        $("#extranet_hojainspeccion_fechaCosecha").datepicker();
+
+        function agregarCooperador(id, nombre)
+        {
+            $("#nomCoop").text(nombre);
+            $("#extranet_registrocampo_cooperador").val(id);
+        }
+        {{ parent() }}
+        $(function(){
+            $("#inspeccion_categoria").change(function(){
+                var data = {
+                    categoria_id: $(this).val()
+                };
+                $.ajax({
+                    type: 'post',
+                    url: '{{ path("extranet_select_generacion") }}',
+                    data: data,
+                    success: function(data) {
+                        $('#inspeccion_generacion').html(data);
+                    }
+                });
+            });
+            $("#inspeccion_categoriapret").change(function(){
+                var data = {
+                    categoria_id: $(this).val()
+                };
+                $.ajax({
+                    type: 'post',
+                    url: '{{ path("extranet_select_generacion") }}',
+                    data: data,
+                    success: function(data) {
+                        $('#inspeccion_generacionpret').html(data);
+                    }
+                });
+            });
+            $("#inspeccion_generacion").change(function(){
+                var valor = $(this).val();
+                $("#extranet_hojainspeccion_generacionUtilizada").val(valor);
+            });
+            $("#inspeccion_generacionpret").change(function(){
+                var valor = $(this).val();
+                $("#extranet_hojainspeccion_generacionPretendida").val(valor);
+            });
+        });
+    </script>
+{% endblock %}

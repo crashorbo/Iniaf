@@ -1,0 +1,9 @@
+extranet_inspeccioncampo_crear:
+    pattern:  /crear/{id}
+    defaults: { _controller: ExtranetBundle:InspeccionCampo:crear }
+
+extranet_inspeccioncampo_imprimir:
+    pattern:  /imprimir/{id}.{_format}
+    defaults: { _controller: ExtranetBundle:InspeccionCampo:imprimir, _format: pdf }
+    requirements:
+      _format: html|pdf

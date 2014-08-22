@@ -1,0 +1,31 @@
+backend_localizacion_home:
+    pattern:  /
+    defaults: { _controller: BackendBundle:Localizacion:index }
+
+backend_localizacion_provincias:
+    pattern:  /provincias
+    defaults: { _controller: BackendBundle:Localizacion:provincias }
+
+backend_localizacion_municipios:
+    pattern:  /municipios
+    defaults: { _controller: BackendBundle:Localizacion:municipios }
+
+backend_localizacion_comunidades:
+    pattern:  /comunidades
+    defaults: { _controller: BackendBundle:Localizacion:comunidades }
+
+backend_localizacion_crear:
+    pattern:  /crear
+    defaults: { _controller: BackendBundle:Localizacion:crear }
+
+backend_localizacion_filtrodep:
+    pattern:  /filtrodep:
+    defaults: { _controller: BackendBundle:Localizacion:filtrodep }
+
+backend_localizacion_filtropro:
+    pattern:  /filtropro:
+    defaults: { _controller: BackendBundle:Localizacion:filtropro }
+
+backend_localizacion_filtrocom:
+    pattern:  /filtrocom:
+    defaults: { _controller: BackendBundle:Localizacion:filtrocom }

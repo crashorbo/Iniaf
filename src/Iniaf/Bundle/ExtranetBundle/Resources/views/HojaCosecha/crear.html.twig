@@ -1,0 +1,191 @@
+{% extends 'ExtranetBundle::layout.html.twig' %}
+
+{% block subtitulo %}Certificacion{% endblock %}
+
+{% block seccion %}Inscripcion{% endblock %}
+
+{% block navprin %}
+    <li><a href="{{ path('extranet_home') }}"> Inicio</a></li>
+    {% if usuario.rol == 'ADMINISTRADOR' %}
+        <li><a href="">Tarifa</a></li>
+        <li><a href="">Cobro</a></li>
+    {% endif %}
+    {% if usuario.rol == 'TECNICO' %}
+        <li><a href="{{ path('extranet_semillera_home') }}">Semillera</a></li>
+        <li class="active"><a href="{{ path('extranet_certificacion_home') }}">Certificacion</a></li>
+    {% endif %}
+{% endblock %}
+
+{% block conprin %}
+    <div class="col-md-10 col-md-offset-1">
+        <div class="row">
+            <div class="col-md-6">
+                <p><b>Semillera: </b>{{ registro.inscripcion.semillera.nombre }}</p>
+                <p><b>Campaña: </b>{{ registro.inscripcion.campana }}</p>
+                <p><b>Cooperador: </b>{{ registro.cooperador.nombre }}</p>
+            </div>
+            <div class="col-md-6">
+                <p><b>Comunidad: </b>{{ registro.inscripcion.semillera.comunidad }}</p>
+                <p><b>Nro Campo: </b>{{ registro.nroCampo }}</p>
+                <p><b>Cultivo:</b> {{ registro.variedad.cultivo }}</p>
+            </div>
+        </div>
+        <hr/>
+        <div class="row">
+            <form role="form" action="{{ path('extranet_hojacosecha_crear', {'id': registro.id }) }}" method="POST">
+            {{ form_errors(form) }}
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label for="">Planta Acondicionadora:</label>
+                        {{ form_errors(form.plantaAcondicionadora) }}
+                        {{ form_widget(form.plantaAcondicionadora) }}
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label for="">Superficie(Has):</label>
+                        {{ form_errors(form.superficie) }}
+                        {{ form_widget(form.superficie) }}
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label for="">Mezcla Varietal(%):</label>
+                        {{ form_errors(form.mezclaVarietal) }}
+                        {{ form_widget(form.mezclaVarietal) }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label for="">Plantas Anormales(%):</label>
+                        {{ form_errors(form.plantasAnormales) }}
+                        {{ form_widget(form.plantasAnormales) }}
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label for="">Rendimiento(Tm/Ha):</label>
+                        {{ form_errors(form.rendimientoD) }}
+                        {{ form_widget(form.rendimientoD) }}
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label for="">Rendimiento/Campo(Tn):</label>
+                        {{ form_errors(form.rendimientoCampo) }}
+                        {{ form_widget(form.rendimientoCampo) }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label for="">N° de cupones Entregados:</label>
+                        {{ form_errors(form.cupones) }}
+                        {{ form_widget(form.cupones) }}
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label for="">Serie de Cupones:</label>
+                        {{ form_errors(form.serieCupones) }}
+                        {{ form_widget(form.serieCupones) }}
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label for="">Campo Aprobado:</label>
+                        {{ form_errors(form.campoAprobado) }}
+                        {{ form_widget(form.campoAprobado) }}
+                    </div>
+                </div>
+            </div>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label for="">Categoria en Campo:</label>
+                            <select class="form-control" name="registro_categoriapret" id="hojacosecha_categoria">
+                                <option value="">CATEGORIA</option>
+                                {% for categoria in categorias %}
+                                    <option value="{{ categoria.id }}">{{ categoria }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label for="">Generacion en Campo:</label>
+                            <select class="form-control" name="registro_generacionpret" id="hojacosecha_generacion">
+                                <option value="">GENERACION</option>
+                            </select>
+                            {{ form_errors(form.generacion) }}
+                            {{ form_widget(form.generacion) }}
+                        </div>
+                    </div>
+                </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="">Persona que recibio la Hoja de Cosecha:</label>
+                        {{ form_errors(form.personaEntregado) }}
+                        {{ form_widget(form.personaEntregado) }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="">Descripcion de la mezcla varietal:</label>
+                        {{ form_errors(form.descripcionMezcla) }}
+                        {{ form_widget(form.descripcionMezcla) }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="">Observaciones y Recomendaciones:</label>
+                        {{ form_errors(form.observaciones) }}
+                        {{ form_widget(form.observaciones) }}
+                    </div>
+                </div>
+            </div>
+            {{ form_rest(form) }}
+            <div class="row">
+                <div class="col-xs-3 col-xs-offset-9">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script>
+        {{ parent() }}
+        $(function(){
+            $("#hojacosecha_categoria").change(function(){
+                var data = {
+                    categoria_id: $(this).val()
+                };
+                $.ajax({
+                    type: 'post',
+                    url: '{{ path("extranet_select_generacion") }}',
+                    data: data,
+                    success: function(data) {
+                        $('#hojacosecha_generacion').html(data);
+                    }
+                });
+            });
+            $("#hojacosecha_generacion").change(function(){
+                var valor = $(this).val();
+                $("#certificacionbundle_hojacosecha_generacion").val(valor);
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,7 @@
+parameters:
+#    cooperador.example.class: Iniaf\Bundle\CooperadorBundle\Example
+
+services:
+#    cooperador.example:
+#        class: %cooperador.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

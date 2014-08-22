@@ -1,0 +1,21 @@
+extranet_semillera_home:
+    pattern:  /
+    defaults: { _controller: ExtranetBundle:Semillera:index }
+
+extranet_semillera_ver:
+    pattern:  /ver/{id}
+    defaults: { _controller: ExtranetBundle:Semillera:ver }
+
+extranet_semillera_crear:
+    pattern:  /crear/{id}
+    defaults: { _controller: ExtranetBundle:Semillera:crear }
+
+extranet_semillera_eliminar:
+    pattern:  /{id_semillera}/eliminar/{id_afiliado}
+    defaults: { _controller: ExtranetBundle:Semillera:eliminar }
+
+extranet_semillera_imprimir:
+  pattern:  /imprimir/{semillera_id}.{_format}
+  defaults: { _controller: ExtranetBundle:Semillera:imprimir, _format: pdf }
+  requirements:
+    _format: html|pdf

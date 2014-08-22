@@ -1,0 +1,7 @@
+backend_cultivo_home:
+    pattern:  /
+    defaults: { _controller: BackendBundle:Cultivo:index }
+
+backend_cultivo_crear:
+    pattern:  /crear
+    defaults: { _controller: BackendBundle:Cultivo:crear }

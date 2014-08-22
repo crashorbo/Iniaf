@@ -1,0 +1,11 @@
+backend_categoria_home:
+    pattern:  /
+    defaults: { _controller: BackendBundle:categoria:index }
+
+backend_categoria_crear:
+    pattern:  /crear
+    defaults: { _controller: BackendBundle:Categoria:crear }
+
+backend_filtrocat:
+    pattern:  /filtrocat
+    defaults: { _controller: BackendBundle:Categoria:filtrocat }

@@ -1,0 +1,59 @@
+{% extends 'SemillaBundle::layout.html.twig' %}
+
+{% block contenido %}
+    <div>
+    <form action="{{ path('semilla_variedad_crear') }}" method="POST">
+        {{ form_row(form.cultivo) }}
+        {{ form_row(form.nombre) }}
+        {{ form_row(form.numeroRegistro) }}
+        <button type="submit" class="btn btn-success">
+            Guardar
+        </button>
+    </form>
+    </div>
+    <hr/>
+    <div>
+        <table>
+            <thead>
+                <th>Id</th>
+                <th>Cultivo</th>
+                <th>Nombre</th>
+                <th>Numero de Registro</th>
+                <th>Acciones</th>
+            </thead>
+            <tbody id="contvar">
+                {% for entity in entities %}
+                <tr>
+                    <td>{{ entity.id }}</td>
+                    <td>{{ entity.cultivo }}</td>
+                    <td>{{ entity.nombre }}</td>
+                    <td>{{ entity.numeroRegistro }}</td>
+                    <td><a href="">Editar</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(function(){
+            $("#variedad_cultivo").change(function(){
+                var data = {
+                    cultivo_id: $(this).val()
+                };
+
+                $.ajax({
+                    type:   'post',
+                    url:    '{{ path("semilla_filtrovar") }}',
+                    data: data,
+                    success: function(data){
+                        $('#contvar').html(data);
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

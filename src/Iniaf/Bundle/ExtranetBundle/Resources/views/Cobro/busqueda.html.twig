@@ -1,0 +1,69 @@
+{% extends 'ExtranetBundle::layout.html.twig' %}
+
+{% block subtitulo %}Cobro{% endblock %}
+
+{% block seccion %}Cobro{% endblock %}
+
+{% block opciones %}
+    <li><a type="button" class="button" href="#" onclick="javascript:window.open('{{ path('extranet_deuda_imprimir', {'id': cooperador.id}) }}',null,'height=500,width=700,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes');">Imprimir</a></li>
+{% endblock %}
+
+{% block navprin %}
+    <li><a href="{{ path('extranet_home') }}"> Inicio</a></li>
+    {% if usuario.rol == 'ADMINISTRADOR' %}
+        <li><a href="{{ path('extranet_tarifa_home') }}">Tarifa</a></li>
+        <li><a href="{{ path('extranet_cobro_home') }}">Cobro</a></li>
+    {% endif %}
+    {% if usuario.rol == 'TECNICO' %}
+        <li class="active"><a href="{{ path('extranet_semillera_home') }}">Semillera</a></li>
+        <li><a href="{{ path('extranet_certificacion_home') }}">Certificacion</a></li>
+    {% endif %}
+{% endblock %}
+
+{% block conprin %}
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <b>Cooperador: </b>{{ cooperador.nombre }}
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+            <th>Cultivo</th>
+            <th>Nro de Campo</th>
+            <th>Superficie</th>
+            <th>Campaña</th>
+            <th>Saldo</th>
+            <th>Sub Total</th>
+            </thead>
+            <tbody id="tarcult">
+                {% set totalsaldo = 0 %}
+                {% set total = 0 %}
+                {% for registro in registros %}
+                    {% if registro.saldo != 0 %}
+                    <tr>
+                        <td>{{ registro.variedad.cultivo }}</td>
+                        <td>{{ registro.nroCampo }}</td>
+                        <td>{{ registro.superficie }}</td>
+                        <td>{{ registro.inscripcion.campana }}</td>
+                        <td>{{ registro.saldo }}</td>
+                        <td>{{ registro.total }}</td>
+                        <td><a type="button" class="btn btn-primary btn-xs" href="{{ path('extranet_cobro_pago', { 'id': registro.id }) }}">Cobrar</a></td>
+                    </tr>
+                    {% set total = total + registro.total %}
+                    {% set totalsaldo = totalsaldo + registro.saldo %}
+                    {% endif %}
+                {% endfor %}
+                    <tr>
+                        <td><b>TOTAL</b></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>{{ totalsaldo }}</td>
+                        <td>{{ total }}</td>
+                    </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

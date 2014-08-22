@@ -1,0 +1,15 @@
+semilla_cultivo:
+    resource: "@SemillaBundle/Resources/config/routing/cultivo.yml"
+    prefix:   /cultivo
+
+semilla_variedad:
+    resource: "@SemillaBundle/Resources/config/routing/variedad.yml"
+    prefix:   /variedad
+
+semilla_categoria:
+    resource: "@SemillaBundle/Resources/config/routing/categoria.yml"
+    prefix:   /categoria
+
+semilla_generacion:
+    resource: "@SemillaBundle/Resources/config/routing/generacion.yml"
+    prefix:   /generacion

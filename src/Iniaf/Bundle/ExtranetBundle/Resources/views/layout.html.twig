@@ -1,0 +1,26 @@
+{% extends '::base.html.twig' %}
+
+{% block titulo %}Extranet - {% block subtitulo %}{% endblock %}{% endblock %}
+{% block tipo %}<a class="navbar-brand" href="{{ path('extranet_home') }}">
+        {% if usuario.rol == 'TECNICO' %} Tecnico {% else %} Administrador {% endif %}</a>{% endblock %}
+{% block usuario %}
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{ usuario.nombres }} {{ usuario.apellidos }} <b class="caret"></b></a>
+    <ul class="dropdown-menu">
+        <li><a href="{{ path('extranet_perfil_home') }}"><i class="fa fa-user"></i> Perfil</a></li>
+        <li class="divider"></li>
+        <li><a href="{{ path('extranet_logout') }}"><i class="fa fa-power-off"></i> Cerrar Sesion</a></li>
+    </ul>
+{% endblock %}
+{% block encabezado %}
+    <nav class="navbar navbar-default">
+        <div class="navbar-header">
+            <a href="" class="navbar-brand">{% block seccion %}{% endblock %}</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            {% block opciones %}
+
+            {% endblock %}
+        </ul>
+    </nav>
+
+{% endblock %}

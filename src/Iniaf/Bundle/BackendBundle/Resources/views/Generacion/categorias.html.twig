@@ -1,0 +1,4 @@
+<option value="">Categorias</option>
+{% for categoria in categorias %}
+    <option value="{{ categoria.id }}">{{ categoria.nombre }}</option>
+{% endfor %}

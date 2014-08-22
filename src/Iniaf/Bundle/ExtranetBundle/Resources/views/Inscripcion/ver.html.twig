@@ -1,0 +1,101 @@
+{% extends 'ExtranetBundle::layout.html.twig' %}
+
+{% block subtitulo %}Certificacion{% endblock %}
+
+{% block seccion %}Inscripcion{% endblock %}
+
+{% block navprin %}
+    <li><a href="{{ path('extranet_home') }}"> Inicio</a></li>
+    {% if usuario.rol == 'ADMINISTRADOR' %}
+        <li><a href="">Tarifa</a></li>
+        <li><a href="">Cobro</a></li>
+    {% endif %}
+    {% if usuario.rol == 'TECNICO' %}
+        <li><a href="{{ path('extranet_semillera_home') }}">Semillera</a></li>
+        <li class="active"><a href="{{ path('extranet_certificacion_home') }}">Certificacion</a></li>
+    {% endif %}
+{% endblock %}
+{% block opciones %}
+
+{% endblock %}
+{% block conprin %}
+    <div class="row">
+        <div class="col-md-offset-1 col-md-5">
+            <p><b>Semillera: </b>{{ entity.semillera.nombre }}</p>
+            <p><b>Tecnico Responsable: </b>{{ entity.semillera.tecnicoResponsable }}</p>
+            <p><b>Responsable: </b>{{ entity.semillera.Responsable }}</p>
+            <p><b>Provincia: </b>{{ entity.semillera.comunidad.municipio.provincia }}</p>
+            <p><b>Direccion: </b>{{ entity.semillera.direccion }}</p>
+            <p><b>Telefono: </b>{{ entity.semillera.telefono }}</p>
+        </div>
+        <div class="col-md-5">
+            <p><b>Campaña: </b>{{ entity.campana }}</p>
+            {% set numeroCooperadores = 0 %}
+            <p><b>Numero de Cooperadores </b>{{ numeroCooperadores }}</p>
+            <p><b>CI o NIT: </b>{{ entity.semillera.ciNit }}</p>
+            <p><b>Municipio: </b>{{ entity.semillera.comunidad.municipio }}</p>
+            <br/>
+            <a type="button" class="btn btn-primary" href="{{ path('extranet_registro_crear', {'id': entity.id}) }}">Registro de Campo</a>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                <th>N° de Campo</th>
+                <th>Cooperador</th>
+                <th>Superficie</th>
+                <th>Acciones</th>
+                </thead>
+                <tbody id="contcat">
+                {% for registro in registros %}
+                    <tr>
+                        <td>{{ registro.nroCampo }}</td>
+                        <td>{{ registro.cooperador.nombre }}</td>
+                        <td>{{ registro.superficie }}</td>
+                        <td><a href="{{ path('extranet_registro_ver', {'id': registro.id}) }}">Ver</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="registroCampo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Buscar Semillera</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-inline">
+                        <div class="form-group col-sm-offset-3">
+
+                            <input type="text" class="form-control" id="inputBusqueda" onkeyup=javascript:this.value=this.value.toUpperCase(); placeholder="Ingrese su Busqueda">
+                        </div>
+                        <button type="submit" class="btn btn-default">Buscar</button>
+                    </form>
+                    <hr/>
+
+                    <div class="modal-footer">
+                        <button type="button" id="cerrarModal" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script type="text/javascript">
+        function agregarSemillera(valor){
+            var valorp = document.getElementById("valorSemillera");
+            valorp.innerHTML = valor
+            $("#cerrarModal").click();
+            document.getElementById("inscripcion_semillera").value = valor;
+        }
+    </script>
+{% endblock %}

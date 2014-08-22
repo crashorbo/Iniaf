@@ -1,0 +1,7 @@
+parameters:
+#    semillera.example.class: Iniaf\Bundle\SemilleraBundle\Example
+
+services:
+#    semillera.example:
+#        class: %semillera.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

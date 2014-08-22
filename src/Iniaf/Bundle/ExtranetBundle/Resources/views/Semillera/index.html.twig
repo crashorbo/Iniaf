@@ -1,0 +1,46 @@
+{% extends 'ExtranetBundle::layout.html.twig' %}
+
+{% block subtitulo %}Semillera{% endblock %}
+
+{% block seccion %}Semillera{% endblock %}
+
+{% block navprin %}
+    <li><a href="{{ path('extranet_home') }}"> Inicio</a></li>
+    {% if usuario.rol == 'ADMINISTRADOR' %}
+        <li><a href="">Tarifa</a></li>
+        <li><a href="">Cobro</a></li>
+    {% endif %}
+    {% if usuario.rol == 'TECNICO' %}
+        <li class="active"><a href="{{ path('extranet_semillera_home') }}">Semillera</a></li>
+        <li><a href="{{ path('extranet_certificacion_home') }}">Certificacion</a></li>
+    {% endif %}
+{% endblock %}
+
+{% block conprin %}
+
+    <hr/>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th>Comunidad</th>
+                <th>Acciones</th>
+                </thead>
+                <tbody id="contcat">
+                {% for entity in entities %}
+                    <tr>
+                        <td>{{ entity.id }}</td>
+                        <td>{{ entity.nombre }}</td>
+                        <td>{{ entity.tipo }}</td>
+                        <td>{{ entity.comunidad }}</td>
+                        <td><a href="{{ path('extranet_semillera_ver',{'id': entity.id}) }}">Ver</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

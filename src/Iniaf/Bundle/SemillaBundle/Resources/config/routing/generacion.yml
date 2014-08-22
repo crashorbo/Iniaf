@@ -1,0 +1,23 @@
+semilla_generacion_home:
+    pattern:  /
+    defaults: { _controller: SemillaBundle:Generacion:index }
+
+semilla_generacion_crear:
+    pattern:  /crear
+    defaults: { _controller: SemillaBundle:Generacion:crear }
+
+semilla_gencat:
+    pattern:  /gencat
+    defaults: { _controller: SemillaBundle:Generacion:gencat }
+
+semilla_filtrogen:
+    pattern:  /filtrogen
+    defaults: { _controller: SemillaBundle:Generacion:filtrogen }
+
+semilla_filtrogencat:
+    pattern:  /filtrogencat
+    defaults: { _controller: SemillaBundle:Generacion:filtrogencat }
+
+semilla_filtrogengen:
+    pattern:  /filtrogengen
+    defaults: { _controller: SemillaBundle:Generacion:filtrogengen }

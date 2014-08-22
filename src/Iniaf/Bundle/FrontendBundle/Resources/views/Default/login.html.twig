@@ -1,0 +1,21 @@
+{% extends '::frontend.html.twig' %}
+
+{% block navprin %}
+    <li><a href="{{ path('frontend_home') }}">Inicio</a></li>
+    <li><a href="#">Informacion</a></li>
+    <li><a href="">Contacto</a></li>
+    <li class="active"><a href="{{ path('extranet_home') }}">Ingreso</a></li>
+{% endblock %}
+
+{% block contenido %}
+    <div class="container ">
+        <div class="col-md-12 background-fix">
+            <form class="form-signin" action="{{ path("extranet_check") }}" method="post">
+                <h3 class="form-signin-heading">Ingreso al Sistema</h3>
+                <input type="text" class="form-control" id="username" name="_username" required="required" placeholder="Usuario">
+                <input type="password" class="form-control" id="password" name="_password" required="required" placeholder="Contraseña">
+                <button class="btn btn-large btn-primary" type="submit">Ingresar</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,44 @@
+<pdf>
+    <dynamic-page>
+        <h1>Instituto Nacional de Innovación Agropecuaria y Forestal</h1>
+        <div color="white" border.color="black" background.color="black" padding-left="10">Datos de la Semillera</div>
+        <table>
+            <tr>
+                <td width="120" height="12" padding-left="10"><b>Nombre: </b></td>
+                <td padding-left="10">{{ entity.nombre }}</td>
+            </tr>
+            <tr>
+                <td width="120" height="12" padding-left="10"><b>Responsable: </b></td>
+                <td padding-left="10">{{ entity.responsable }}</td>
+            </tr>
+            <tr>
+                <td width="120" height="12" padding-left="10"><b>Tipo: </b></td>
+                <td padding-left="10">{{ entity.tipo }}</td>
+            </tr>
+            <tr>
+                <td width="120" height="12" padding-left="10"><b>Tecnico Responsable: </b></td>
+                <td padding-left="10">{{ entity.tecnicoResponsable }}</td>
+            </tr>
+            <tr>
+                <td width="120" height="12" padding-left="10"><b>Localizacion: </b></td>
+                <td padding-left="10">{{entity.comunidad.municipio.provincia.departamento }} - {{ entity.comunidad.municipio.provincia}} - {{ entity.comunidad.municipio }} - {{ entity.comunidad }}</td>
+            </tr>
+        </table>
+        <br /><br/>
+        <h1>Lista de Cooperadores</h1>
+        <table>
+            <tr color="white" border.color="black" background.color="black" padding-left="10">
+                <td height="12" padding-left="10"><b>Nombre</b></td>
+                <td padding-left="10">CI/NIT</td>
+                <td height="12" padding-left="10">Celular</td>
+            </tr>
+            {% for afiliacion in entity.afiliaciones %}
+                <tr>
+                    <td height="12" padding-left="5"><b>{{ afiliacion.cooperador.nombre }}</b></td>
+                    <td padding-left="10">{{ afiliacion.cooperador.ciNit }}</td>
+                    <td height="12" padding-left="10">{{ afiliacion.cooperador.celular }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </dynamic-page>
+</pdf>

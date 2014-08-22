@@ -1,0 +1,10 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div>
+        <a href="{{ path('semilla_cultivo_home') }}">Cultivo</a> | <a href="{{ path('semilla_variedad_home') }}">Variedad</a> | <a href="{{ path('semilla_categoria_home') }}">Categoria</a> | <a href="{{ path('semilla_generacion_home') }}">Generacion</a>
+    </div>
+    <div>
+        {% block contenido %}{% endblock %}
+    </div>
+{% endblock %}

@@ -1,0 +1,109 @@
+<pdf>
+    <dynamic-page>
+        <h1>Instituto Nacional de Innovación Agropecuaria y Forestal</h1>
+        <h1>HOJA DE INSPECCION DE CAMPOS SEMILLEROS</h1>
+        <table>
+            <tr>
+                <td padding-left="10"><b>Cultivo: </b></td>
+                <td padding-left="10">{{ entity.registroCampo.variedad.cultivo }}</td>
+                <td padding-left="10"><b>Fecha: </b></td>
+                <td padding-left="10">{{ entity.fechaInspeccion | date('d-m-Y') }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Semillera: </b></td>
+                <td padding-left="10">{{ entity.registroCampo.inscripcion.semillera.nombre }}</td>
+                <td padding-left="10"><b>N° Inspeccion: </b></td>
+                <td padding-left="10">{{ entity.numeroInspeccion }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Cooperador: </b></td>
+                <td padding-left="10">{{ entity.registroCampo.cooperador.nombre }}</td>
+                <td padding-left="10"><b>Campaña: </b></td>
+                <td padding-left="10">{{ entity.registroCampo.inscripcion.campana }}</td>
+            </tr>
+        </table>
+        <br/><br/>
+        <table>
+            <tr>
+                <td padding-left="10"><b>Nombre del Lugar: </b></td>
+                <td padding-left="10">{{ entity.nombreLugar }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Numero de Campo: </b></td>
+                <td padding-left="10">{{ entity.registroCampo.nroCampo }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Superficie: </b></td>
+                <td padding-left="10">{{ entity.superficie }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Variedad: </b></td>
+                <td padding-left="10">{{ entity.registroCampo.variedad.nombre }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Generacion Utilizada: </b></td>
+                <td padding-left="10">{{ entity.generacionUtilizada.nombre }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Generacion Pretendida: </b></td>
+                <td padding-left="10">{{ entity.generacionPretendida.nombre }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Cultivo Anterior: </b></td>
+                <td padding-left="10">{{ entity.registroCampo.cultivoAnterior }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Fecha de Siembra: </b></td>
+                <td padding-left="10">{{ entity.registroCampo.fechaSiembra | date('d-m-Y') }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Fecha de Floracion: </b></td>
+                <td padding-left="10">{{ entity.registroCampo.fechaFloracion | date('d--m-Y') }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Fecha de Cosecha: </b></td>
+                <td padding-left="10">{{ entity.registroCampo.fechaCosecha | date('d-m-Y') }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Aislamiento: </b></td>
+                <td padding-left="10">{{ entity.aislamiento }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Poblacion por Ha: </b></td>
+                <td padding-left="10">{{ entity.poblacionHectarea }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Control de Malezas: </b></td>
+                <td padding-left="10">{{ entity.controlMaleza }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Control de Insectos: </b></td>
+                <td padding-left="10">{{ entity.controlInsectos }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Control de Enfermedades: </b></td>
+                <td padding-left="10">{{ entity.controlEnfermedades }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Control General: </b></td>
+                <td padding-left="10">{{ entity.estadoGeneral }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>M.V.P.I.: </b></td>
+                <td padding-left="10">{{ entity.mvpi }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>P.A.P.I: </b></td>
+                <td padding-left="10">{{ entity.papi }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>A la fecha cumple con las Normas:</b></td>
+                <td padding-left="10">{{ entity.cumpleNorma }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>observaciones: </b></td>
+                <td padding-left="10">{{ entity.observaciones }}</td>
+            </tr>
+        </table>
+    </dynamic-page>
+</pdf>

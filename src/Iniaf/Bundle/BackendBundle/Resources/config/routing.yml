@@ -1,0 +1,34 @@
+backend_home:
+    pattern:  /
+    defaults: { _controller: BackendBundle:Default:index }
+
+backend_cultivo:
+    resource: "@BackendBundle/Resources/config/routing/cultivo.yml"
+    prefix:   /cultivo
+
+backend_variedad:
+    resource: "@BackendBundle/Resources/config/routing/variedad.yml"
+    prefix:   /variedad
+
+backend_categoria:
+    resource: "@BackendBundle/Resources/config/routing/categoria.yml"
+    prefix:   /categoria
+
+backend_generacion:
+    resource: "@BackendBundle/Resources/config/routing/generacion.yml"
+    prefix:   /generacion
+
+backend_localizacion:
+    resource: "@BackendBundle/Resources/config/routing/localizacion.yml"
+    prefix:   /localizacion
+
+backend_semillera:
+    resource: "@BackendBundle/Resources/config/routing/semillera.yml"
+    prefix:   /semillera
+
+backend_user:
+    resource: "@BackendBundle/Resources/config/routing/user.yml"
+    prefix:   /user
+
+backend_logout:
+    pattern:  /logout

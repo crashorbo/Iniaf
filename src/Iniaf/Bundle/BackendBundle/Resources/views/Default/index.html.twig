@@ -1,0 +1,13 @@
+{% extends 'BackendBundle::layout.html.twig' %}
+
+{% block subtitulo %}Inicio{% endblock %}
+
+{% block seccion %}Inicio{% endblock %}
+
+{% block navprin %}
+    <li class="active"><a href="{{ path('backend_home') }}"> Inicio</a></li>
+    <li><a href="{{ path('backend_user_home') }}">Usuario</a></li>
+    <li><a href="{{ path('backend_cultivo_home') }}">Semilla</a></li>
+    <li><a href="{{ path('backend_localizacion_home') }}">Localizacion</a></li>
+    <li><a href="{{ path('backend_semillera_home') }}">Semillera</a></li>
+{% endblock %}

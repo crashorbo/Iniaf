@@ -1,0 +1,34 @@
+{% extends '::frontend.html.twig' %}
+
+{% block contenido %}
+    <div class="container">
+        <div class="col-md-12 body-fix">
+            <!-- Carousel
+        ================================================== -->
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <img src="{{ asset('bundles/sbadmin/img/DSC05523.png') }}" alt="">
+
+                    </div>
+                    <div class="item">
+                        <img src="{{ asset('bundles/sbadmin/img/DSC05529.png') }}" alt="">
+
+                    </div>
+                </div>
+                <a class="left carousel-control" href="#myCarousel" data-slide="prev"></a>
+                <a class="right carousel-control" href="#myCarousel" data-slide="next"></a>
+            </div><!-- /.carousel -->
+        </div>
+    </div>
+    <div class="container">
+        <div class="col-md-12 text-center subtitulo-fix">
+            <h1>Acceso Equitativo a Semillas de Calidad.</h1>
+        </div>
+    </div>
+{% endblock %}

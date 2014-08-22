@@ -1,0 +1,11 @@
+backend_semillera_home:
+    pattern:  /
+    defaults: { _controller: BackendBundle:Semillera:index }
+
+backend_semillera_crear:
+    pattern:  /crear
+    defaults: { _controller: BackendBundle:Semillera:crear }
+
+backend_semillera_editar:
+    pattern: /editar/{id}
+    defaults: { _controller: BackendBundle:Semillera:editar }

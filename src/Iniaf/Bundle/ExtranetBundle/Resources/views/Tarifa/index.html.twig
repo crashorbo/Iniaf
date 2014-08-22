@@ -1,0 +1,98 @@
+{% extends 'ExtranetBundle::layout.html.twig' %}
+
+{% block subtitulo %}Tarifa{% endblock %}
+
+{% block seccion %}Tarifa{% endblock %}
+
+{% block navprin %}
+    <li><a href="{{ path('extranet_home') }}"> Inicio</a></li>
+    {% if usuario.rol == 'ADMINISTRADOR' %}
+        <li><a href="{{ path('extranet_tarifa_home') }}">Tarifa</a></li>
+        <li><a href="{{ path('extranet_cobro_home') }}">Cobro</a></li>
+    {% endif %}
+    {% if usuario.rol == 'TECNICO' %}
+        <li class="active"><a href="{{ path('extranet_semillera_home') }}">Semillera</a></li>
+        <li><a href="{{ path('extranet_certificacion_home') }}">Certificacion</a></li>
+    {% endif %}
+{% endblock %}
+
+{% block opciones %}
+
+{% endblock %}
+{% block conprin %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-1">
+                <label for="cultivos">Cultivo</label>
+            </div>
+            <div class="col-md-2">
+                <select class="form-control" name="cultivos" id="cultivos">
+                    <option value="">SELECCIONAR</option>
+                    {% for cultivo in cultivos %}
+                        <option value="{{ cultivo.id }}">{{ cultivo }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                <th>Tipo</th>
+                <th>Monto</th>
+                <th>Acciones</th>
+                </thead>
+                <tbody id="tarcult">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal fade" id="registroTarifa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Modificar Tarifa</h4>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" class="form-inline" action="{{ path('extranet_tarifa_modificar') }}">
+                        <input type="hidden" id="registrocampo" name="_tarifa"/>
+                        <label for="monto">Monto:</label>
+                        <input class="form-control" id="monto" type="text" name="_monto"/>
+                        <hr/>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+<script>
+    function agregarRegistro(id)
+    {
+        $("#registrocampo").val(id);
+    }
+    {{ parent() }}
+    $(function(){
+        $("#cultivos").change(function(){
+            var data = {
+                cultivo_id: $(this).val()
+            };
+            $.ajax({
+                type: 'post',
+                url: '{{ path("extranet_select_tarifa") }}',
+                data: data,
+                success: function(data) {
+                    $('#tarcult').html(data);
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

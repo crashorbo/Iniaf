@@ -1,0 +1,11 @@
+semilla_categoria_home:
+    pattern:  /
+    defaults: { _controller: SemillaBundle:categoria:index }
+
+semilla_categoria_crear:
+    pattern:  /crear
+    defaults: { _controller: SemillaBundle:Categoria:crear }
+
+semilla_filtrocat:
+    pattern:  /filtrocat
+    defaults: { _controller: SemillaBundle:Categoria:filtrocat }

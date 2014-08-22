@@ -1,0 +1,7 @@
+{% for tarifa in tarifas %}
+    <tr>
+        <td>{{ tarifa.tipo }}</td>
+        <td>{{ tarifa.monto }}</td>
+        <td><a href="#" onclick="agregarRegistro({{ tarifa.id }})" data-toggle="modal" data-target="#registroTarifa">Modificar Monto</a></td>
+    </tr>
+{% endfor %}

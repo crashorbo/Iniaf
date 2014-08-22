@@ -1,0 +1,87 @@
+<pdf>
+    <dynamic-page>
+        <h1>Instituto Nacional de Innovación Agropecuaria y Forestal</h1>
+        <h1>REGISTRO DE CAMPO</h1>
+        <table>
+            <tr>
+                <td padding-left="10"><b>Semillera: </b>{{ entity.inscripcion.semillera.nombre }}</td>
+                <td padding-left="10"><b>Campaña: </b>{{ entity.inscripcion.campana }}</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td padding-left="10"><b>Cooperador: </b>{{ entity.cooperador.nombre }}</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td padding-left="10"><b>Comunidad: </b>{{ entity.inscripcion.semillera.comunidad }}</td>
+                <td padding-left="10"><b>Municipio: </b>{{ entity.inscripcion.semillera.comunidad.municipio }}</td>
+                <td padding-left="10"><b>Provincia: </b>{{ entity.inscripcion.semillera.comunidad.municipio.provincia }}</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td padding-left="10"><b>Cultivo: </b>{{ entity.variedad.cultivo }}</td>
+                <td padding-left="10"><b>Variedad: </b>{{ entity.variedad.nombre }}</td>
+                <td padding-left="10"><b>N° de Campo: </b>{{ entity.nroCampo }}</td>
+                <td padding-left="10"><b>Superficie(Ha): </b>{{ entity.superficie }}</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td padding-left="10"><b>Generacion Utilizada: </b>{{ entity.generacion.nombre }}</td>
+                <td padding-left="10"><b>Fecha de Siembra: </b>{{ entity.fechaSiembra | date('d-m-Y') }}</td>
+                <td padding-left="10"><b>Cultivo Anterior: </b>{{ entity.cultivoAnterior }}</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                {% if entity.aislamiento %}
+                    <td width="120" padding-left="10"><b>Aislamiento: </b>SI</td>
+                {% else %}
+                    <td width="120" padding-left="10"><b>Aislamiento: </b>NO</td>
+                {% endif %}
+                <td padding-left="10"><b>Fecha de Floracion: </b>{{ entity.fechaFloracion | date('d-m-Y') }}</td>
+                <td padding-left="10"><b>Fecha aprox. a la Cosecha: </b>{{ entity.fechaCosecha | date('d-m-Y') }}</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td width="100" padding-left="10"><b>Plantas/Metro: </b>{{ entity.plantasMetro }}</td>
+                <td width="120" padding-left="10"><b>Distancia surco (m): </b>{{ entity.distanciaSurco }}</td>
+                <td width="120" padding-left="10"><b>Poblacion(../Ha): </b>{{ entity.poblacion }}</td>
+                <td padding-left="10"><b>Generacion Pretendida: </b>{{ entity.generacionPretendida.nombre }}</td>
+            </tr>
+        </table>
+        <h3>Lista de Inspecciones</h3>
+        <table>
+            <tr>
+                <td padding-left="10"><b>Fecha Inspeccion</b></td>
+                <td padding-left="10"><b>M.V. PI/HA</b></td>
+                <td padding-left="10"><b>P.A. % PI/HA</b></td>
+                <td padding-left="10"><b>Control de Enfermedades</b></td>
+                <td padding-left="10"><b>Control de Insectos</b></td>
+                <td padding-left="10"><b>Control de Malezas</b></td>
+            </tr>
+            {% for inspeccion in entity.hojaInspeccions %}
+                <tr>
+                    <td>{{ inspeccion.fechaInspeccion | date('d - m -Y')}}</td>
+                    <td>{{ inspeccion.mvpi }}</td>
+                    <td>{{ inspeccion.papi }}</td>
+                    <td>{{ inspeccion.controlEnfermedades }}</td>
+                    <td>{{ inspeccion.controlInsectos }}</td>
+                    <td>{{ inspeccion.controlMaleza }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <h3>Observaciones</h3>
+        <table>
+            {% for inspeccion in entity.hojaInspeccions %}
+            <tr>
+                <td width="120" padding-left="10">{{ inspeccion.observaciones }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </dynamic-page>
+</pdf>

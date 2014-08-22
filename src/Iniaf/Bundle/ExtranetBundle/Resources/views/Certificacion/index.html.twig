@@ -1,0 +1,127 @@
+{% extends 'ExtranetBundle::layout.html.twig' %}
+
+{% block subtitulo %}Certificacion{% endblock %}
+
+{% block seccion %}Inscripcion{% endblock %}
+
+{% block navprin %}
+    <li><a href="{{ path('extranet_home') }}"> Inicio</a></li>
+    {% if usuario.rol == 'ADMINISTRADOR' %}
+        <li><a href="">Tarifa</a></li>
+        <li><a href="">Cobro</a></li>
+    {% endif %}
+    {% if usuario.rol == 'TECNICO' %}
+        <li><a href="{{ path('extranet_semillera_home') }}">Semillera</a></li>
+        <li class="active"><a href="{{ path('extranet_certificacion_home') }}">Certificacion</a></li>
+    {% endif %}
+{% endblock %}
+
+{% block conprin %}
+    <div class="row">
+        <div class="col-md-offset-2 col-md-6">
+            <form class="form-horizontal" action="{{ path('extranet_inscripcion_crear') }}" method="POST" role="form">
+                {{ form_errors(form) }}
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Semillera</label>
+                    <div class="col-sm-8">
+                        {{ form_errors(form.semillera) }}
+                        {{ form_widget(form.semillera) }}
+                        <div class="col-sm-9">
+                            <p class="form-control-static" id="valorSemillera">Semillera</p>
+                        </div>
+                        <div class="col-sm-3">
+                            <a type="button" class="btn btn-primary btn-sm" href="" data-toggle="modal" data-target="#buscarSemillera">Buscar</a>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Campaña</label>
+                    <div class="col-sm-8">
+                        {{ form_errors(form.campana) }}
+                        {{ form_widget(form.campana) }}
+                    </div>
+                </div>
+                <div class="col-sm-offset-4 col-sm-8">
+                    <button type="submit" class="btn btn-success">
+                        Guardar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                <th>Id</th>
+                <th>Nombre Semillera</th>
+                <th>Campaña</th>
+                <th>Acciones</th>
+                </thead>
+                <tbody id="contcat">
+                {% for inscripcion in inscripciones %}
+                    <tr>
+                        <td>{{ inscripcion.id }}</td>
+                        <td>{{ inscripcion.semillera.nombre }}</td>
+                        <td>{{ inscripcion.campana }}</td>
+                        <td><a href="{{ path('extranet_inscripcion_ver',{'id': inscripcion.id}) }}">Ver</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="buscarSemillera" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Buscar Semillera</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-inline">
+                        <div class="form-group col-sm-offset-3">
+
+                            <input type="text" class="form-control" id="inputBusqueda" onkeyup=javascript:this.value=this.value.toUpperCase(); placeholder="Ingrese su Busqueda">
+                        </div>
+                        <button type="submit" class="btn btn-default">Buscar</button>
+                    </form>
+                    <hr/>
+                    <table class="table">
+                        <thead>
+                            <th>Nombre</th>
+                            <th>Accion</th>
+                        </thead>
+                        <tbody id="buscaSemilleras">
+                            {% for entity in entities %}
+                                <tr>
+                                    <td>{{ entity.nombre }}</td>
+                                    <td><button onclick="agregarSemillera('{{ entity.nombre }}')">Seleccionar</button></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="modal-footer">
+                        <button type="button" id="cerrarModal" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+
+    <script type="text/javascript">
+        function agregarSemillera(valor){
+            var valorp = document.getElementById("valorSemillera");
+            valorp.innerHTML = valor
+            $("#cerrarModal").click();
+            document.getElementById("inscripcion_semillera").value = valor;
+        }
+    </script>
+{% endblock %}

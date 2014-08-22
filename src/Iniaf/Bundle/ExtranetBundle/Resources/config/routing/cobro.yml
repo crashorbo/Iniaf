@@ -1,0 +1,23 @@
+extranet_cobro_home:
+    pattern:  /
+    defaults: { _controller: ExtranetBundle:Cobro:index }
+
+extranet_cobro_busqueda:
+    pattern:  /busqueda
+    defaults: { _controller: ExtranetBundle:Cobro:busqueda }
+
+extranet_cobro_pago:
+    pattern:  /pago/{id}
+    defaults: { _controller: ExtranetBundle:Cobro:pago }
+
+extranet_deuda_imprimir:
+    pattern:  /deuda/imprimir/{id}.{_format}
+    defaults: { _controller: ExtranetBundle:Cobro:deuda, _format: pdf }
+    requirements:
+      _format: html|pdf
+
+extranet_cobro_imprimir:
+    pattern:  /imprimir/{id}.{_format}
+    defaults: { _controller: ExtranetBundle:Cobro:imprimir, _format: pdf }
+    requirements:
+      _format: html|pdf

@@ -1,0 +1,75 @@
+<pdf>
+    <dynamic-page>
+        <h1>Instituto Nacional de Innovación Agropecuaria y Forestal</h1>
+        <div padding-left="10"> <h1>RECIBO N° {{ entity.id }}</h1></div>
+        <br/><br/>
+        <table>
+            <tr>
+                <td width="120" height="12" padding-left="10"><b>Nombre: </b></td>
+                <td padding-left="10">{{ entity.registroCampo.cooperador.nombre }}</td>
+            </tr>
+            <tr>
+                <td width="120" height="12" padding-left="10"><b>CI/NIT: </b></td>
+                <td padding-left="10">{{ entity.registroCampo.cooperador.ciNit }}</td>
+            </tr>
+            <tr>
+                <td width="120" height="12" padding-left="10"><b>Semillera: </b></td>
+                <td padding-left="10">{{ entity.registroCampo.inscripcion.semillera.nombre }}</td>
+            </tr>
+            <tr>
+                <td width="120" height="12" padding-left="10"><b>Fecha de Pago: </b></td>
+                <td padding-left="10">{{ entity.fecha | date('d-m-Y') }}</td>
+            </tr>
+            <tr>
+                <td width="120" height="12" padding-left="10"><b>Numero Factura: </b></td>
+                <td padding-left="10">{{ entity.numeroFactura }}</td>
+            </tr>
+        </table>
+        <table>
+            <tr color="white" border.color="black" background.color="black" padding-left="10">
+                <td width="400" height="12" padding-left="10">Descripcion</td>
+                <td padding-left="10">Monto (Bs.)</td>
+            </tr>
+            <tr>
+                <td height="12" padding-left="10">{{ entity.descripcion }}</td>
+                <td height="12" padding-left="10">{{ entity.monto }}</td>
+            </tr>
+        </table>
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+        <h1>Instituto Nacional de Innovación Agropecuaria y Forestal</h1>
+        <div padding-left="10"> <h1>RECIBO N° {{ entity.id }}</h1></div>
+        <br/><br/>
+        <table>
+            <tr>
+                <td width="120" height="12" padding-left="10"><b>Nombre: </b></td>
+                <td padding-left="10">{{ entity.registroCampo.cooperador.nombre }}</td>
+            </tr>
+            <tr>
+                <td width="120" height="12" padding-left="10"><b>CI/NIT: </b></td>
+                <td padding-left="10">{{ entity.registroCampo.cooperador.ciNit }}</td>
+            </tr>
+            <tr>
+                <td width="120" height="12" padding-left="10"><b>Semillera: </b></td>
+                <td padding-left="10">{{ entity.registroCampo.inscripcion.semillera.nombre }}</td>
+            </tr>
+            <tr>
+                <td width="120" height="12" padding-left="10"><b>Fecha de Pago: </b></td>
+                <td padding-left="10">{{ entity.fecha | date('d-m-Y') }}</td>
+            </tr>
+            <tr>
+                <td width="120" height="12" padding-left="10"><b>Numero Factura: </b></td>
+                <td padding-left="10">{{ entity.numeroFactura }}</td>
+            </tr>
+        </table>
+        <table>
+            <tr color="white" border.color="black" background.color="black" padding-left="10">
+                <td width="400" height="12" padding-left="10">Descripcion</td>
+                <td padding-left="10">Monto (Bs.)</td>
+            </tr>
+            <tr>
+                <td height="12" padding-left="10">{{ entity.descripcion }}</td>
+                <td height="12" padding-left="10">{{ entity.monto }}</td>
+            </tr>
+        </table>
+    </dynamic-page>
+</pdf>

@@ -1,0 +1,7 @@
+frontend_home:
+    pattern:  /
+    defaults: { _controller: FrontendBundle:Default:index }
+
+frontend_login:
+    pattern:  /login
+    defaults: { _controller: FrontendBundle:Default:login }

@@ -1,0 +1,31 @@
+{% extends 'SemillaBundle::layout.html.twig' %}
+
+{% block contenido %}
+    <div>
+    <form action="{{ path('semilla_cultivo_crear') }}" method="POST">
+        {{ form_row(form.nombre) }}
+        <button type="submit" class="btn btn-success">
+            Guardar
+        </button>
+    </form>
+    </div>
+    <hr/>
+    <div>
+        <table>
+            <thead>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Acciones</th>
+            </thead>
+            <tbody>
+                {% for entity in entities %}
+                <tr>
+                    <td>{{ entity.id }}</td>
+                    <td>{{ entity.nombre }}</td>
+                    <td><a href="">Editar</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

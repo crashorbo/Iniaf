@@ -1,0 +1,126 @@
+{% extends 'BackendBundle::layout.html.twig' %}
+
+{% block subtitulo %}Semilla{% endblock %}
+
+{% block seccion %}Semilla{% endblock %}
+
+{% block navprin %}
+    <li><a href=""> Inicio</a></li>
+    <li><a href="{{ path('backend_user_home') }}">Usuario</a></li>
+    <li class="active"><a href="{{ path('backend_cultivo_home') }}">Semilla</a></li>
+    <li><a href="{{ path('backend_localizacion_home') }}">Localizacion</a></li>
+    <li><a href="{{ path('backend_semillera_home') }}">Semillera</a></li>
+{% endblock %}
+
+{% block breadcrumb %}
+    <div class="btn-group btn-group-justified">
+        <a type="button" class="btn btn-primary" href="{{ path('backend_cultivo_home') }}">Cultivo</a>
+        <a type="button" class="btn btn-primary" href="{{ path('backend_variedad_home') }}">Variedad</a>
+        <a type="button" class="btn btn-primary" href="{{ path('backend_categoria_home') }}">Categoria</a>
+        <a type="button" class="btn btn-primary active" href="{{ path('backend_generacion_home') }}">Generacion</a>
+    </div>
+{% endblock %}
+
+{% block conprin %}
+    <div class="row">
+        <div class="col-md-offset-2 col-md-6">
+            <form class="form-horizontal" action="{{ path('backend_generacion_crear') }}" method="POST">
+                {{ form_errors(form) }}
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Cultivo</label>
+                    <div class="col-sm-8">
+                        {{ form_errors(form.cultivo) }}
+                        {{ form_widget(form.cultivo) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Categoria</label>
+                    <div class="col-sm-8">
+                        {{ form_errors(form.categoria) }}
+                        {{ form_widget(form.categoria) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Nombre</label>
+                    <div class="col-sm-8">
+                        {{ form_errors(form.nombre) }}
+                        {{ form_widget(form.nombre) }}
+                    </div>
+                </div>
+                <div class="col-sm-offset-4 col-sm-8">
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                <th>Id</th>
+                <th>Cultivo</th>
+                <th>Categoria</th>
+                <th>Nombre</th>
+                <th>Acciones</th>
+                </thead>
+                <tbody id="contcat">
+                {% for entity in entities %}
+                    <tr>
+                        <td>{{ entity.id }}</td>
+                        <td>{{ entity.categoria.cultivo }}</td>
+                        <td>{{ entity.categoria }}</td>
+                        <td>{{ entity.nombre }}</td>
+                        <td><a href="">Editar</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+    <script>
+        $(function(){
+            $("#generacion_cultivo").change(function(){
+                var data = {
+                    cultivo_id: $(this).val()
+                };
+
+                $.ajax({
+                    type:   'post',
+                    url:    '{{ path("backend_gencat") }}',
+                    data: data,
+                    success: function(data){
+                        $('#generacion_categoria').html(data);
+                    }
+                });
+                $.ajax({
+                    type:   'post',
+                    url:    '{{ path("backend_filtrogencat") }}',
+                    data: data,
+                    success: function(data){
+                        $('#contcat').html(data);
+                    }
+                });
+            });
+
+            $("#generacion_categoria").change(function(){
+                var data = {
+                    categoria_id: $(this).val()
+                };
+
+                $.ajax({
+                    type:   'post',
+                    url:    '{{ path("backend_filtrogengen") }}',
+                    data: data,
+                    success: function(data){
+                        $('#contcat').html(data);
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

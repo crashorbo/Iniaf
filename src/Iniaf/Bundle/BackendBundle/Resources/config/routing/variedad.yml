@@ -1,0 +1,11 @@
+backend_variedad_home:
+    pattern:  /
+    defaults: { _controller: BackendBundle:Variedad:index }
+
+backend_variedad_crear:
+    pattern:  /crear
+    defaults: { _controller: BackendBundle:Variedad:crear }
+
+backend_filtrovar:
+    pattern:  /filtrovar
+    defaults: { _controller: BackendBundle:Variedad:filtrovar }

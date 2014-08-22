@@ -1,0 +1,9 @@
+{% for entity in generaciones %}
+    <tr>
+        <td>{{ entity.id }}</td>
+        <td>{{ entity.categoria.cultivo }}</td>
+        <td>{{ entity.categoria }}</td>
+        <td>{{ entity.nombre }}</td>
+        <td><a href="">Editar</a></td>
+    </tr>
+{%  endfor %}

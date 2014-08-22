@@ -1,0 +1,13 @@
+{% extends 'ExtranetBundle::layout.html.twig' %}
+
+{% block navprin %}
+    <li class="active"><a href=""> Inicio</a></li>
+    {% if usuario.rol == 'ADMINISTRADOR' %}
+        <li><a href="{{ path('extranet_tarifa_home') }}">Tarifa</a></li>
+        <li><a href="{{ path('extranet_cobro_home') }}">Cobro</a></li>
+    {% endif %}
+    {% if usuario.rol == 'TECNICO' %}
+        <li><a href="{{ path('extranet_semillera_home') }}">Semillera</a></li>
+        <li><a href="{{ path('extranet_certificacion_home') }}">Certificacion</a></li>
+    {% endif %}
+{% endblock %}

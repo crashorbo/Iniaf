@@ -1,0 +1,152 @@
+{% extends 'BackendBundle::layout.html.twig' %}
+
+{% block subtitulo %}Localizacion{% endblock %}
+
+{% block seccion %}Localizacion{% endblock %}
+
+{% block navprin %}
+    <li><a href="{{ path('backend_home') }}"> Inicio</a></li>
+    <li><a href="{{ path('backend_user_home') }}">Usuario</a></li>
+    <li><a href="{{ path('backend_cultivo_home') }}">Semilla</a></li>
+    <li class="active"><a href="{{ path('backend_localizacion_home') }}">Localizacion</a></li>
+    <li><a href="{{ path('backend_semillera_home') }}">Semillera</a></li>
+{% endblock %}
+
+{% block breadcrumb %}
+
+{% endblock %}
+
+{% block conprin %}
+<div class="row">
+    <div class="col-md-offset-2 col-md-6">
+        <form class="form-horizontal" action="{{ path('backend_localizacion_crear') }}" method="POST">
+            {{ form_errors(form) }}
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Departamento</label>
+                <div class="col-sm-8">
+                    {{ form_errors(form.departamento) }}
+                    {{ form_widget(form.departamento) }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Provincia</label>
+                <div class="col-sm-8">
+                    {{ form_errors(form.provincia) }}
+                    {{ form_widget(form.provincia) }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Municipio</label>
+                <div class="col-sm-8">
+                    {{ form_errors(form.municipio) }}
+                    {{ form_widget(form.municipio) }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Comunidad</label>
+                <div class="col-sm-8">
+                    {{ form_errors(form.comunidad) }}
+                    {{ form_widget(form.comunidad) }}
+                </div>
+            </div>
+            <div class="col-sm-offset-4 col-sm-8">
+                <button type="submit" class="btn btn-success">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>
+<hr/>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped">
+        <thead>
+            <th>Departamento</th>
+            <th>Provincia</th>
+            <th>Municipio</th>
+            <th>Comunidad</th>
+            <th>Acciones</th>
+        </thead>
+        <tbody id="contloc">
+            {% for comunidad in comunidades %}
+                <tr>
+                    <td>{{ comunidad.municipio.provincia.departamento }}</td>
+                    <td>{{ comunidad.municipio.provincia }}</td>
+                    <td>{{ comunidad.municipio }}</td>
+                    <td>{{ comunidad }}</td>
+                    <td><a href="">Editar</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+    <script>
+        $(function(){
+            $("#localizacion_departamento").change(function(){
+                var data = {
+                    departamento_id: $(this).val()
+                };
+
+                $.ajax({
+                    type: 'post',
+                    url:  '{{ path("backend_localizacion_provincias") }}',
+                    data: data,
+                    success: function(data) {
+                        $('#localizacion_provincia').html(data);
+                        $('#localizacion_municipio').html("<option>Municipio</option>");
+                    }
+                });
+                $.ajax({
+                    type:   'post',
+                    url:    '{{ path("backend_localizacion_filtrodep") }}',
+                    data: data,
+                    success: function(data){
+                        $('#contloc').html(data);
+                    }
+                });
+            });
+
+            $("#localizacion_provincia").change(function(){
+                var data = {
+                    provincia_id: $(this).val()
+                };
+
+                $.ajax({
+                    type: 'post',
+                    url: '{{ path("backend_localizacion_municipios") }}',
+                    data: data,
+                    success: function(data) {
+                        $('#localizacion_municipio').html(data);
+                    }
+                });
+                $.ajax({
+                    type:   'post',
+                    url:    '{{ path("backend_localizacion_filtropro") }}',
+                    data: data,
+                    success: function(data){
+                        $('#contloc').html(data);
+                    }
+                });
+            });
+
+            $("#localizacion_municipio").change(function(){
+                var data = {
+                    municipio_id: $(this).val()
+                };
+
+                $.ajax({
+                    type:   'post',
+                    url:    '{{ path("backend_localizacion_filtrocom") }}',
+                    data: data,
+                    success: function(data){
+                        $('#contloc').html(data);
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

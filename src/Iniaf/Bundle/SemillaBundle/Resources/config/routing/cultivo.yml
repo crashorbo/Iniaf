@@ -1,0 +1,7 @@
+semilla_cultivo_home:
+    pattern:  /
+    defaults: { _controller: SemillaBundle:Cultivo:index }
+
+semilla_cultivo_crear:
+    pattern:  /crear
+    defaults: { _controller: SemillaBundle:Cultivo:crear }

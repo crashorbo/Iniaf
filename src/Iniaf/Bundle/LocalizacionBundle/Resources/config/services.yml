@@ -1,0 +1,7 @@
+parameters:
+#    localizacion.example.class: Iniaf\Bundle\LocalizacionBundle\Example
+
+services:
+#    localizacion.example:
+#        class: %localizacion.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

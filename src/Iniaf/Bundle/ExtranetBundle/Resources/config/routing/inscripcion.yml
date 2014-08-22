@@ -1,0 +1,7 @@
+extranet_inscripcion_crear:
+    pattern:  /crear
+    defaults: { _controller: ExtranetBundle:Inscripcion:crear }
+
+extranet_inscripcion_ver:
+    pattern:  /ver/{id}
+    defaults: { _controller: ExtranetBundle:Inscripcion:ver }

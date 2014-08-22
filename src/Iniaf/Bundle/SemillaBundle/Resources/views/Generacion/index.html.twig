@@ -1,0 +1,84 @@
+{% extends 'SemillaBundle::layout.html.twig' %}
+
+{% block contenido %}
+    <div>
+        <form action="{{ path('semilla_generacion_crear') }}" method="POST">
+            {{ form_row(form.cultivo) }}
+            {{ form_row(form.categoria) }}
+            {{ form_row(form.nombre) }}
+            <button type="submit" class="btn btn-success">
+                Guardar
+            </button>
+        </form>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                <th>Id</th>
+                <th>Cultivo</th>
+                <th>Categoria</th>
+                <th>Nombre</th>
+                <th>Acciones</th>
+                </thead>
+                <tbody id="contcat">
+                {% for entity in entities %}
+                    <tr>
+                        <td>{{ entity.id }}</td>
+                        <td>{{ entity.categoria.cultivo }}</td>
+                        <td>{{ entity.categoria }}</td>
+                        <td>{{ entity.nombre }}</td>
+                        <td><a href="">Editar</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+    <script>
+        $(function(){
+            $("#generacion_cultivo").change(function(){
+                var data = {
+                    cultivo_id: $(this).val()
+                };
+
+                $.ajax({
+                    type:   'post',
+                    url:    '{{ path("backend_gencat") }}',
+                    data: data,
+                    success: function(data){
+                        $('#generacion_categoria').html(data);
+                    }
+                });
+                $.ajax({
+                    type:   'post',
+                    url:    '{{ path("backend_filtrogencat") }}',
+                    data: data,
+                    success: function(data){
+                        $('#contcat').html(data);
+                    }
+                });
+            });
+
+            $("#generacion_categoria").change(function(){
+                var data = {
+                    categoria_id: $(this).val()
+                };
+
+                $.ajax({
+                    type:   'post',
+                    url:    '{{ path("backend_filtrogengen") }}',
+                    data: data,
+                    success: function(data){
+                        $('#contcat').html(data);
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

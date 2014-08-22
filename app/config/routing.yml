@@ -1,0 +1,12 @@
+frontend:
+    resource: "@FrontendBundle/Resources/config/routing.yml"
+    prefix:   /
+
+extranet:
+    resource:   "@ExtranetBundle/Resources/config/routing.yml"
+    prefix:     /extranet
+
+backend:
+    resource: "@BackendBundle/Resources/config/routing.yml"
+    prefix:   /administracion
+

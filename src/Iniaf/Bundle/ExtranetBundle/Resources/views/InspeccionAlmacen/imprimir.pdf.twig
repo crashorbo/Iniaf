@@ -1,0 +1,127 @@
+<pdf>
+    <dynamic-page>
+        <h1>Instituto Nacional de Innovación Agropecuaria y Forestal</h1>
+        <h1>INSPECCION DE SEMILLAS DE PAPA EN ALMACENES</h1>
+        <table>
+            <tr>
+                <td padding-left="10"><b>Campaña: </b></td>
+                <td padding-left="10">{{ entity.registroCampo.inscripcion.campana }}</td>
+                <td padding-left="10"><b>Comunidad: </b></td>
+                <td padding-left="10">{{ entity.registroCampo.inscripcion.semillera.comunidad.nombre }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Semillera: </b></td>
+                <td padding-left="10">{{ entity.registroCampo.inscripcion.semillera.nombre }}</td>
+                <td padding-left="10"><b>Cooperador: </b></td>
+                <td padding-left="10">{{ entity.registroCampo.cooperador.nombre }}</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td padding-left="10"><b>Fecha: </b></td>
+                <td padding-left="10">{{ entity.fechaInspeccion | date('d-m-Y') }}</td>
+            </tr>
+        </table>
+        <br/><br/>
+        <table>
+            <tr>
+                <td padding-left="10"><b>N° de Campo: </b></td>
+                <td padding-left="10">{{ entity.registroCampo.nroCampo }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>N° de Lote: </b></td>
+                <td padding-left="10">{{ entity.numeroLote }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Variedad: </b></td>
+                <td padding-left="10">{{ entity.registroCampo.variedad.nombre }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Generacion en Almacen: </b></td>
+                <td padding-left="10">{{ entity.generacion.nombre }}</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td width="200" padding-left="10">Tamaño del Tuberculo</td>
+                <td padding-left="10">I</td>
+                <td padding-left="10">II</td>
+                <td padding-left="10">III</td>
+                <td padding-left="10">IV</td>
+                <td padding-left="10">V</td>
+            </tr>
+            <tr>
+                <td width="200" padding-left="10">N° de Bolsas/Tamaño</td>
+                <td padding-left="10">{{ entity.t1 }}</td>
+                <td padding-left="10">{{ entity.t2 }}</td>
+                <td padding-left="10">{{ entity.t3 }}</td>
+                <td padding-left="10">{{ entity.t4 }}</td>
+                <td padding-left="10">{{ entity.t5 }}</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td padding-left="10"><b>Peso por Bolsa(Kg): </b></td>
+                <td padding-left="10">{{ entity.pesoBolsa }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Total de Bolsas por Lote: </b></td>
+                <td padding-left="10">{{ entity.totalBolsas }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Puntaje Maximo: </b></td>
+                <td padding-left="10">{{ entity.puntajeMaximo }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>aprobado: </b></td>
+                <td padding-left="10">{{ entity.aprobado }}</td>
+            </tr>
+        </table>
+        <br/><br/>
+        <table>
+            <tr>
+                <td width="300" padding-left="10"><b>Factor - Indice Importancia: </b></td>
+                <td padding-left="10"><b>N° T: </b></td>
+                <td padding-left="10"><b>Total: </b></td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Pudricion Blanda/x10: </b></td>
+                <td padding-left="10">{{ entity.n1 }}</td>
+                <td padding-left="10">{{ entity.n1 * 10}}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Pudricion Seca/x8: </b></td>
+                <td padding-left="10">{{ entity.n2}}</td>
+                <td padding-left="10">{{ entity.n2 * 8}}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Roña(Spngospora subterranea)/x4: </b></td>
+                <td padding-left="10">{{ entity.n3 }}</td>
+                <td padding-left="10">{{ entity.n3 * 4 }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Rhizoctoniasis/x4: </b></td>
+                <td padding-left="10">{{ entity.n4 }}</td>
+                <td padding-left="10">{{ entity.n4 * 4}}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Tuberculos afectados por insectos/x2: </b></td>
+                <td padding-left="10">{{ entity.n5 }}</td>
+                <td padding-left="10">{{ entity.n5 * 2}}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Mezcla Varietal/x1: </b></td>
+                <td padding-left="10">{{ entity.n6 }}</td>
+                <td padding-left="10">{{ entity.n6 }}</td>
+            </tr>
+        </table>
+        <br/><br/>
+        <table>
+            <tr>
+                <td padding-left="10"><b>Observaciones: </b></td>
+                <td padding-left="10">{{ entity.observaciones }}</td>
+            </tr>
+        </table>
+
+    </dynamic-page>
+</pdf>

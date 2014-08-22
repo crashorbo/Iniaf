@@ -1,0 +1,25 @@
+extranet_registro_crear:
+    pattern:  /crear/{id}
+    defaults: { _controller: ExtranetBundle:RegistroCampo:crear }
+
+extranet_select_categoria:
+    pattern:  /select/categoria
+    defaults: { _controller: ExtranetBundle:RegistroCampo:categorias }
+
+extranet_select_variedad:
+    pattern:  /select/variedad
+    defaults: { _controller: ExtranetBundle:RegistroCampo:variedades }
+
+extranet_select_generacion:
+    pattern:  /select/generacion
+    defaults: { _controller: ExtranetBundle:RegistroCampo:generaciones }
+
+extranet_registro_ver:
+    pattern:  /ver/{id}
+    defaults: { _controller: ExtranetBundle:RegistroCampo:ver }
+
+extranet_registro_imprimir:
+    pattern:  /imprimir/{id}.{_format}
+    defaults: { _controller: ExtranetBundle:RegistroCampo:imprimir, _format: pdf }
+    requirements:
+      _format: html|pdf

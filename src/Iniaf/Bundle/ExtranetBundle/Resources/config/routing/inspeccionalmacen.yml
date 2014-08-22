@@ -1,0 +1,9 @@
+extranet_inspeccionalmacen_crear:
+    pattern:  /crear/{id}
+    defaults: { _controller: ExtranetBundle:InspeccionAlmacen:crear }
+
+extranet_inspeccionalmacen_imprimir:
+    pattern:  /imprimir/{id}.{_format}
+    defaults: { _controller: ExtranetBundle:InspeccionAlmacen:imprimir, _format: pdf }
+    requirements:
+      _format: html|pdf

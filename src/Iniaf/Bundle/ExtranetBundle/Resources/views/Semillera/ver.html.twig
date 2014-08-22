@@ -1,0 +1,114 @@
+{% extends 'ExtranetBundle::layout.html.twig' %}
+
+{% block subtitulo %}Semillera{% endblock %}
+
+{% block seccion %}Semillera{% endblock %}
+
+{% block navprin %}
+    <li><a href="{{ path('extranet_home') }}"> Inicio</a></li>
+    {% if usuario.rol == 'ADMINISTRADOR' %}
+        <li><a href="">Tarifa</a></li>
+        <li><a href="">Cobro</a></li>
+    {% endif %}
+    {% if usuario.rol == 'TECNICO' %}
+        <li class="active"><a href="{{ path('extranet_semillera_home') }}">Semillera</a></li>
+        <li><a href="{{ path('extranet_certificacion_home') }}">Certificacion</a></li>
+    {% endif %}
+{% endblock %}
+
+{% block opciones %}
+    <li><a type="button" class="button" href="" onclick="javascript:window.open('{{ path('extranet_semillera_imprimir', {'semillera_id': entity.id}) }}',null,'height=500,width=700,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes');">Imprimir</a></li>
+    <li><a href="" type="button" data-toggle="modal" data-target="#agregarCooperador">Agregar Cooperador</a></li>
+{% endblock %}
+
+{% block conprin %}
+    <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+            <p><b>Nombre: </b>{{ entity.nombre }}</p>
+            <p><b>Responsable: </b>{{ entity.responsable }}</p>
+            <p><b>Tipo: </b>{{ entity.tipo }}</p>
+            <p><b>Tecnico Responsable: </b>{{ entity.tecnicoResponsable }}</p>
+            <p><b>Localizacion: </b>{{entity.comunidad.municipio.provincia.departamento }} - {{ entity.comunidad.municipio.provincia}} - {{ entity.comunidad.municipio }} - {{ entity.comunidad }}</p>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                <th>Nombre</th>
+                <th>CI/NIT</th>
+                <th>Celular</th>
+                <th>Acciones</th>
+                </thead>
+                <tbody id="contcat">
+                {% for afiliacion in entity.afiliaciones %}
+                    <tr>
+                        <td>{{ afiliacion.cooperador.nombre }}</td>
+                        <td>{{ afiliacion.cooperador.ciNit }}</td>
+                        <td>{{ afiliacion.cooperador.celular }}</td>
+                        <td><a href="{{ path('extranet_semillera_eliminar', {'id_afiliado':afiliacion.id, 'id_semillera': entity.id}) }}">Eliminar</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="agregarCooperador" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Registro Cooperador</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" action="{{ path('extranet_semillera_crear', {'id': entity.id}) }}" method="POST" role="form">
+                        {{ form_errors(form) }}
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Nombre</label>
+                            <div class="col-sm-9">
+                                {{ form_errors(form.nombre) }}
+                                {{ form_widget(form.nombre) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">CI/NIT</label>
+                            <div class="col-sm-9">
+                                {{ form_errors(form.ciNit) }}
+                                {{ form_widget(form.ciNit) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Telefono</label>
+                            <div class="col-sm-9">
+                                {{ form_errors(form.telefono) }}
+                                {{ form_widget(form.telefono) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Celular</label>
+                            <div class="col-sm-9">
+                                {{ form_errors(form.celular) }}
+                                {{ form_widget(form.celular) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Direccion</label>
+                            <div class="col-sm-9">
+                                {{ form_errors(form.direccion) }}
+                                {{ form_widget(form.direccion) }}
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+{% endblock %}

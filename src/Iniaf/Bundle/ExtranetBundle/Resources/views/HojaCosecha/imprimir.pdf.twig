@@ -1,0 +1,85 @@
+<pdf>
+    <dynamic-page>
+        <h1>Instituto Nacional de Innovación Agropecuaria y Forestal</h1>
+        <h1>HOJA DE COSECHA</h1>
+        <table>
+            <tr>
+                <td padding-left="10"><b>Campaña: </b></td>
+                <td padding-left="10">{{ entity.registroCampo.inscripcion.campana }}</td>
+                <td padding-left="10"><b>Comunidad: </b></td>
+                <td padding-left="10">{{ entity.registroCampo.inscripcion.semillera.comunidad.nombre }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Semillera: </b></td>
+                <td padding-left="10">{{ entity.registroCampo.inscripcion.semillera.nombre }}</td>
+                <td padding-left="10"><b>Cultivo: </b></td>
+                <td padding-left="10">{{ entity.registroCampo.variedad.cultivo }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Cooperador: </b></td>
+                <td padding-left="10">{{ entity.registroCampo.cooperador.nombre }}</td>
+                <td padding-left="10"><b>PLanta Acondicionadora: </b></td>
+                <td padding-left="10">{{ entity.plantaAcondicionadora }}</td>
+            </tr>
+        </table>
+        <br/><br/>
+        <table>
+            <tr>
+                <td padding-left="10"><b>N° de Campo: </b></td>
+                <td padding-left="10">{{ entity.registroCampo.nroCampo }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Superficie: </b></td>
+                <td padding-left="10">{{ entity.superficie }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Variedad: </b></td>
+                <td padding-left="10">{{ entity.registroCampo.variedad.nombre }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Generacion en Campo: </b></td>
+                <td padding-left="10">{{ entity.generacion.nombre }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Mezcla Varietal(%): </b></td>
+                <td padding-left="10">{{ entity.mezclaVarietal }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Plantas Anormales: </b></td>
+                <td padding-left="10">{{ entity.plantasAnormales }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Rendimiento(Tm/Ha): </b></td>
+                <td padding-left="10">{{ entity.rendimientoD }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Rendimiento/Campo(Tn): </b></td>
+                <td padding-left="10">{{ entity.rendimientoCampo }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>N° de Cupones entregados: </b></td>
+                <td padding-left="10">{{ entity.cupones }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Serie de Cupones: </b></td>
+                <td padding-left="10">{{ entity.serieCupones }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Campo Aprobado: </b></td>
+                <td padding-left="10">{{ entity.campoAprobado }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Persona que recibio la Hoja de Cosecha: </b></td>
+                <td padding-left="10">{{ entity.personaEntregado }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Descripcion de la Mezcla Varietal: </b></td>
+                <td padding-left="10">{{ entity.descripcionMezcla }}</td>
+            </tr>
+            <tr>
+                <td padding-left="10"><b>Observaciones y Recomendaciones: </b></td>
+                <td padding-left="10">{{ entity.observaciones }}</td>
+            </tr>
+        </table>
+    </dynamic-page>
+</pdf>

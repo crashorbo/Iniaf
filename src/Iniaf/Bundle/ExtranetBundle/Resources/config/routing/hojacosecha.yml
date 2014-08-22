@@ -1,0 +1,9 @@
+extranet_hojacosecha_crear:
+    pattern:  /crear/{id}
+    defaults: { _controller: ExtranetBundle:HojaCosecha:crear }
+
+extranet_hojacosecha_imprimir:
+    pattern:  /imprimir/{id}.{_format}
+    defaults: { _controller: ExtranetBundle:HojaCosecha:imprimir, _format: pdf }
+    requirements:
+      _format: html|pdf

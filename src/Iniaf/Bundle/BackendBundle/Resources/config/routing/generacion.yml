@@ -1,0 +1,23 @@
+backend_generacion_home:
+    pattern:  /
+    defaults: { _controller: BackendBundle:Generacion:index }
+
+backend_generacion_crear:
+    pattern:  /crear
+    defaults: { _controller: BackendBundle:Generacion:crear }
+
+backend_gencat:
+    pattern:  /gencat
+    defaults: { _controller: BackendBundle:Generacion:gencat }
+
+backend_filtrogen:
+    pattern:  /filtrogen
+    defaults: { _controller: BackendBundle:Generacion:filtrogen }
+
+backend_filtrogencat:
+    pattern:  /filtrogencat
+    defaults: { _controller: BackendBundle:Generacion:filtrogencat }
+
+backend_filtrogengen:
+    pattern:  /filtrogengen
+    defaults: { _controller: BackendBundle:Generacion:filtrogengen }

@@ -1,0 +1,11 @@
+backend_user_home:
+    pattern:  /
+    defaults: { _controller: BackendBundle:User:index }
+
+backend_user_crear:
+    pattern:  /crear
+    defaults: { _controller: BackendBundle:User:crear }
+
+backend_user_editar:
+    pattern:  /editar/{id}
+    defaults: { _controller: BackendBundle:User:editar }

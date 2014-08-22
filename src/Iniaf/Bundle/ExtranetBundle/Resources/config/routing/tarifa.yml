@@ -1,0 +1,11 @@
+extranet_tarifa_home:
+    pattern:  /
+    defaults: { _controller: ExtranetBundle:Tarifa:index }
+
+extranet_tarifa_modificar:
+    pattern:  /modificar
+    defaults: { _controller: ExtranetBundle:Tarifa:modificar }
+
+extranet_select_tarifa:
+    pattern:  /tarifas
+    defaults: { _controller: ExtranetBundle:Tarifa:buscar }

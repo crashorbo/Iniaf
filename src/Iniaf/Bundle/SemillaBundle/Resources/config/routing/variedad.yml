@@ -1,0 +1,11 @@
+semilla_variedad_home:
+    pattern:  /
+    defaults: { _controller: SemillaBundle:Variedad:index }
+
+semilla_variedad_crear:
+    pattern:  /crear
+    defaults: { _controller: SemillaBundle:Variedad:crear }
+
+semilla_filtrovar:
+    pattern:  /filtrovar
+    defaults: { _controller: SemillaBundle:Variedad:filtrovar }

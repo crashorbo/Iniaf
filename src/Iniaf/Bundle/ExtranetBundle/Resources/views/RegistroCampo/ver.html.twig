@@ -1,0 +1,181 @@
+{% extends 'ExtranetBundle::layout.html.twig' %}
+
+{% block subtitulo %}Semillera{% endblock %}
+
+{% block seccion %}Registro de Campo{% endblock %}
+
+{% block navprin %}
+    <li><a href="{{ path('extranet_home') }}"> Inicio</a></li>
+    {% if usuario.rol == 'ADMINISTRADOR' %}
+        <li><a href="">Tarifa</a></li>
+        <li><a href="">Cobro</a></li>
+    {% endif %}
+    {% if usuario.rol == 'TECNICO' %}
+        <li><a href="{{ path('extranet_semillera_home') }}">Semillera</a></li>
+        <li class="active"><a href="{{ path('extranet_certificacion_home') }}">Certificacion</a></li>
+    {% endif %}
+{% endblock %}
+{% block opciones %}
+    <li><a type="button" class="button" href="#" onclick="javascript:window.open('{{ path('extranet_registro_imprimir', {'id': registro.id}) }}',null,'height=500,width=700,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes');">Imprimir</a></li>
+{% endblock %}
+
+{% block conprin %}
+    <div class="row">
+        <div class="col-md-3">
+            <p><b>Cultivo: </b>{{ registro.variedad.cultivo }}</p>
+        </div>
+        <div class="col-md-3">
+            <p><b>Variedad: </b>{{ registro.variedad.nombre }}</p>
+        </div>
+        <div class="col-md-3">
+            <p><b>N° de Campo: </b>{{ registro.nroCampo }}</p>
+        </div>
+        <div class="col-md-3">
+            <p><b>Superficie(Ha): </b>{{ registro.superficie }}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <p><b>Generacion Utilizada: </b>{{ registro.generacion.nombre }}</p>
+        </div>
+        <div class="col-md-3">
+            <p><b>Fecha de Siembra: </b>{{ registro.fechaSiembra | date('d - m - Y') }}</p>
+        </div>
+        <div class="col-md-3">
+            <p><b>Cultivo anterior: </b>{{ registro.cultivoAnterior }}</p>
+        </div>
+        <div class="col-md-3">
+            <p><b>Aislamiento: </b>{{ registro.aislamiento }}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <p><b>Fecha Floracion: </b>{{ registro.fechaFloracion | date('d - m - Y') }}</p>
+        </div>
+        <div class="col-md-3">
+            <p><b>Fecha Cosecha: </b>{{ registro.fechaCosecha | date('d - m - Y') }}</p>
+        </div>
+        <div class="col-md-3">
+            <p><b>Plantas/Metro: </b>{{ registro.plantasMetro }}</p>
+        </div>
+        <div class="col-md-3">
+            <p><b>Distancia Surco(m): </b>{{ registro.distanciaSurco }}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <p><b>Poblacion(../Ha): </b>{{ registro.poblacion }}</p>
+        </div>
+        <div class="col-md-3">
+            <p><b>Generacion Pretendida: </b>{{ registro.generacionPretendida.nombre }}</p>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Inspecciones de Campo</h3>
+        </div>
+        <div class="col-md-4">
+            <a type="button" class="btn btn-primary" href="{{ path('extranet_inspeccioncampo_crear', {'id': registro.id}) }}">Inspeccion de Campo</a>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                    <th>Nro Inspeccion</th>
+                    <th>Fecha Inspeccion</th>
+                    <th>M.V PI/HA</th>
+                    <th>P.A %PI/HA</th>
+                    <th>Control Enfermedades</th>
+                    <th>Control Insectos</th>
+                    <th>Control Malezas</th>
+                </thead>
+                <tbody>
+                    {% for inspeccion in registro.hojaInspeccions %}
+                        <tr>
+                            <td>{{ inspeccion.numeroInspeccion }}</td>
+                            <td>{{ inspeccion.fechaInspeccion | date('d - m -Y')}}</td>
+                            <td>{{ inspeccion.mvpi }}</td>
+                            <td>{{ inspeccion.papi }}</td>
+                            <td>{{ inspeccion.controlEnfermedades }}</td>
+                            <td>{{ inspeccion.controlInsectos }}</td>
+                            <td>{{ inspeccion.controlMaleza }}</td>
+                            <td><a type="button" class="button" href="#" onclick="javascript:window.open('{{ path('extranet_inspeccioncampo_imprimir', {'id': inspeccion.id}) }}',null,'height=500,width=700,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes');">Imprimir</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Hoja de Cosecha</h3>
+        </div>
+        <div class="col-md-4">
+                <a type="button" class="btn btn-primary" href="{{ path('extranet_hojacosecha_crear', {'id': registro.id}) }}">Hoja de Cosecha</a>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                <th>Mezcla Varietal</th>
+                <th>Plantas Anormales</th>
+                <th>Rendimiento</th>
+                <th>N° Cupones Entregados</th>
+                <th>Campo Aprobado</th>
+                </thead>
+                <tbody>
+                {% for cosecha in registro.hojaCosechas %}
+                    <tr>
+                        <td>{{ cosecha.mezclaVarietal }}</td>
+                        <td>{{ cosecha.plantasAnormales}}</td>
+                        <td>{{ cosecha.rendimientoD }}</td>
+                        <td>{{ cosecha.cupones }}</td>
+                        <td>{{ cosecha.campoAprobado }}</td>
+                        <td><a type="button" class="button" href="#" onclick="javascript:window.open('{{ path('extranet_hojacosecha_imprimir', {'id': cosecha.id}) }}',null,'height=500,width=700,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes');">Imprimir</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Inspeccion en Almacen</h3>
+        </div>
+        <div class="col-md-4">
+                <a type="button" class="btn btn-primary" href="{{ path('extranet_inspeccionalmacen_crear', {'id': registro.id}) }}">Inspeccion en Almacen</a>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                <th>Nro Lote</th>
+                <th>Peso por Bolsa</th>
+                <th>Total de Bolsas</th>
+                <th>Puntaje Maximo</th>
+                <th>Fecha de Inspeccion</th>
+                </thead>
+                <tbody>
+                {% for almacen in registro.inspeccionAlmacens %}
+                    <tr>
+                        <td>{{ almacen.numeroLote }}</td>
+                        <td>{{ almacen.pesoBolsa}}</td>
+                        <td>{{ almacen.totalBolsas }}</td>
+                        <td>{{ almacen.puntajeMaximo }}</td>
+                        <td>{{ almacen.fechainspeccion | date('d-m-Y') }}</td>
+                        <td><a type="button" class="button" href="#" onclick="javascript:window.open('{{ path('extranet_inspeccionalmacen_imprimir', {'id': almacen.id}) }}',null,'height=500,width=700,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes');">Imprimir</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

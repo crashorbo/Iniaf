@@ -1,0 +1,49 @@
+{% extends 'BackendBundle::layout.html.twig' %}
+
+{% block subtitulo %}Usuario{% endblock %}
+
+{% block seccion %}Usuario{% endblock %}
+
+{% block navprin %}
+    <li><a href="{{ path('backend_home') }}"> Inicio</a></li>
+    <li class="active"><a href="{{ path('backend_user_home') }}">Usuario</a></li>
+    <li><a href="{{ path('backend_cultivo_home') }}">Semilla</a></li>
+    <li><a href="{{ path('backend_localizacion_home') }}">Localizacion</a></li>
+    <li><a href="{{ path('backend_semillera_home') }}">Semillera</a></li>
+{% endblock %}
+
+{% block conprin %}
+    <div class="row">
+        <div class="col-md-3 col-md-offset-9">
+            <a type="button" class="btn btn-primary" href="{{ path('backend_user_crear') }}">Registrar Usuario</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>CI</th>
+                <th>Telefono</th>
+                <th>Celular</th>
+                <th>Tipo Usuario</th>
+                <th>Acciones</th>
+                </thead>
+                <tbody id="contcat">
+                {% for entity in entities %}
+                    <tr>
+                        <td>{{ entity.nombres }}</td>
+                        <td>{{ entity.apellidos }}</td>
+                        <td>{{ entity.ci }}</td>
+                        <td>{{ entity.telefono }}</td>
+                        <td>{{ entity.celular }}</td>
+                        <td>{{ entity.rol }}</td>
+                        <td><a href="{{ path('backend_user_editar', {'id': entity.id}) }}">Editar</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

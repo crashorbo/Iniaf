@@ -1,0 +1,128 @@
+{% extends 'ExtranetBundle::layout.html.twig' %}
+
+{% block subtitulo %}Cobro{% endblock %}
+
+{% block seccion %}Cobro{% endblock %}
+
+{% block navprin %}
+    <li><a href="{{ path('extranet_home') }}"> Inicio</a></li>
+    {% if usuario.rol == 'ADMINISTRADOR' %}
+        <li><a href="{{ path('extranet_tarifa_home') }}">Tarifa</a></li>
+        <li><a href="{{ path('extranet_cobro_home') }}">Cobro</a></li>
+    {% endif %}
+    {% if usuario.rol == 'TECNICO' %}
+        <li class="active"><a href="{{ path('extranet_semillera_home') }}">Semillera</a></li>
+        <li><a href="{{ path('extranet_certificacion_home') }}">Certificacion</a></li>
+    {% endif %}
+{% endblock %}
+
+{% block conprin %}
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <h2>Pago por Servicios</h2>
+                </div>
+                <div class="col-md-3">
+                    <a type="button" class="btn btn-primary" href="#" data-toggle="modal" data-target="#myModal">Realizar Pago</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <p><b>Cooperador: </b>{{ registro.cooperador.nombre }}</p>
+                    <p><b>Semillera:  </b>{{ registro.inscripcion.semillera.nombre }}</p>
+                </div>
+                <div class="col-md-6">
+                    <p><b>N° de Campo: </b>{{ registro.nroCampo }}</p>
+                    <p><b>Campaña:     </b>{{ registro.inscripcion.campana }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Detalle</h3>
+                </div>
+                <div class="col-md-12">
+                    <table class="table table-striped">
+                        <thead>
+                            <th>Descripcion</th>
+                            <th>Monto</th>
+                        </thead>
+                        <tbody>
+                            {% set total = 0 %}
+                            {% for registrotarifa in registro.tarifas %}
+                                <tr>
+                                    <td>{{ registrotarifa.tarifa.tipo }}</td>
+                                    <td>{{ registrotarifa.tarifa.monto }}</td>
+                                    {% set total = total+registrotarifa.tarifa.monto %}
+                                </tr>
+                            {% endfor %}
+                                <tr>
+                                    <td><b>TOTAL</b></td>
+                                    <td>{{ total }}</td>
+                                </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Pagos Realizados</h3>
+                </div>
+                <div class="col-md-12">
+                    <table class="table table-striped">
+                        <thead>
+                            <th>Descripcion</th>
+                            <th>Numero Factura</th>
+                            <th>Fecha</th>
+                            <th>Monto</th>
+                        </thead>
+                        <tbody>
+                        {% set total = 0 %}
+                        {% for pago in registro.pagos %}
+                            <tr>
+                                <td>{{ pago.descripcion }}</td>
+                                <td>{{ pago.numeroFactura }}</td>
+                                <td>{{ pago.fecha | date('d-m-Y') }}</td>
+                                <td>{{ pago.monto }}</td>
+                                <td><a class="btn btn-primary btn-xs" href="#" onclick="javascript:window.open('{{ path('extranet_cobro_imprimir', {'id': pago.id}) }}',null,'height=500,width=700,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes');">Imprimir</a></td>
+                                {% set total = total+pago.monto %}
+                            </tr>
+                        {% endfor %}
+                        <tr>
+                            <td><b>TOTAL</b></td>
+                            <td></td>
+                            <td></td>
+                            <td>{{ total }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Registrar Pago</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <form action="{{ path('extranet_cobro_pago', { 'id': registro.id }) }}" method="POST">
+                                {{ form_errors(form) }}
+                                {{ form_row(form.descripcion) }}
+                                {{ form_row(form.numeroFactura) }}
+                                {{ form_row(form.monto) }}
+                                <hr/>
+                                <input class="btn-primary form-control" value="Aceptar" type="submit"/>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

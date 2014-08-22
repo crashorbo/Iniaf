@@ -1,0 +1,3 @@
+semillera_homepage:
+    pattern:  /
+    defaults: { _controller: SemilleraBundle:Default:index }

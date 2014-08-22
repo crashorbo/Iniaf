@@ -1,0 +1,40 @@
+security:
+    firewalls:
+        administracion:
+            pattern:    ^/administracion
+            provider:   administradores
+            http_basic:
+                realm:  "Area de Administracion Protegida"
+            logout:
+                path:   /administracion/logout
+                target: /
+        extranet:
+            pattern:    ^/extranet
+            provider:   extranet
+            anonymous: ~
+            form_login:
+                login_path: /extranet/login
+                check_path: /extranet/login_check
+            logout:
+                path:   /extranet/logout
+                target: /
+    access_control:
+        - { path: ^/administracion/*, roles: ROLE_ADMIN }
+        - { path: ^/extranet/login, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/extranet/*,     roles:  ROLE_USER }
+        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        #- { path: ^/_internal/secure, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }
+    encoders:
+        Iniaf\Bundle\UserBundle\Entity\Usuario:        { algorithm: sha512, iterations: 10 }
+        Symfony\Component\Security\Core\User\User:  plaintext
+
+    providers:
+        extranet:
+            entity: { class:  Iniaf\Bundle\UserBundle\Entity\Usuario, property:  username}
+        administradores:
+            memory:
+                users:
+                    - { name: admin,  password: 1234, roles: ROLE_ADMIN }
+
+    role_hierarchy:
+        ROLE_ADMIN: [ROLE_USER, ROLE_ALLOWED_TO_SWITCH]

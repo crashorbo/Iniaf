@@ -1,0 +1,7 @@
+extranet_perfil_home:
+    pattern:  /
+    defaults: { _controller: ExtranetBundle:Perfil:perfil }
+
+extranet_perfil_pass:
+    pattern:  /
+    defaults: { _controller: ExtranetBundle:Perfil:cambiar }
